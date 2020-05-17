@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:insert="common/head.html"/>
+
+<body class="nav-md">
+<div class="container body">
+    <div class="main_container">
+        <th:block th:replace="common/left-panel.html"></th:block>
+
+        <th:block th:replace="common/top-navigation.html"></th:block>
+    </div>
+</div>
+<th:block th:replace="common/scripts.html" :: end></th:block>
+</body>
+
+</html>
