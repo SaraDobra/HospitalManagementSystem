@@ -54,7 +54,7 @@ public class User{
 
     private String title;
 
-    private String workStatus;
+    private String active;
 
     private String specialization;
 

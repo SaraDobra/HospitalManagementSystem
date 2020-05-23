@@ -33,7 +33,6 @@ public class PatientController {
     @GetMapping("/addPatient")
     public String showAddPatientPage(Model model){
         Patient patient = new Patient();
-
         model.addAttribute("patient",patient);
 
         return "add-patient";
@@ -55,7 +54,6 @@ public class PatientController {
     @GetMapping("/edit/{id}")
     public String showPatientEditForm(@PathVariable("id") long id,Model model){
         Patient patient = patientRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid patient Id:" + id));
-
         model.addAttribute("patient",patient);
         return "patient-edit";
     }
