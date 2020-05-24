@@ -1,6 +1,8 @@
 package com.hospitalsystem.hospital_management_system.models;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;
@@ -62,9 +64,11 @@ public class User{
     @JoinTable(name = "user_role",
     	joinColumns = @JoinColumn(name = "user_id"),
     	inverseJoinColumns = @JoinColumn(name = "role_id"))
+    @EqualsAndHashCode.Exclude
     private Set<Role> roles = new HashSet<>();
 
     @ManyToOne
+    @EqualsAndHashCode.Exclude
     private Department department;
 
     @OneToMany(mappedBy = "user")
@@ -72,5 +76,9 @@ public class User{
 
     @OneToMany(mappedBy = "user")
     private Set<Appointment> appointments;
+
+    public void addRole(Role role){
+        roles.add(role);
+    }
 
 }

@@ -22,4 +22,8 @@ public class UserService {
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
+
+    public void addPatient(User user) {
+        userRepository.save(user);
+    }
 }

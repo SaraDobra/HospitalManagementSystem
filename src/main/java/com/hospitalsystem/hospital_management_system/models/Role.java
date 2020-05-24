@@ -1,6 +1,7 @@
 package com.hospitalsystem.hospital_management_system.models;
 
 import lombok.Data;
+import lombok.ToString;
 import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;

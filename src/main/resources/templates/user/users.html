@@ -1,10 +1,143 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<html xmlns:th="http://www.thymeleaf.org">
 
+<th:block th:insert="common/head.html"/>
+
+<body class="nav-md">
+<div class="container body">
+    <div class="main_container">
+        <th:block th:replace="common/left-panel.html"></th:block>
+
+        <th:block th:replace="common/top-navigation.html"></th:block>
+
+        <div class="right_col" role="main">
+            <div class="">
+                <div class="page-title">
+                    <div class="title_left">
+                        <h3>Home
+                            <small>/Perdoruesit</small>
+                        </h3>
+                    </div>
+
+
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="x_panel">
+                            <div class="x_title">
+                                <h2>Perdoruesit</h2>
+
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="x_content">
+                                <a href="/admin/addUser">
+                                    <button type="button" class="btn btn-round btn-info"
+                                            style="margin-bottom: 10px; background-color: #1abb9c"><i
+                                            class="fa fa-user-plus" style="margin-right: 10px"></i>Shto Perdorues
+                                    </button>
+                                </a>
+                                <table id="datatable-buttons" class="table table-striped table-bordered">
+                                    <thead>
+                                    <tr>
+                                        <th>Emri</th>
+                                        <th>Mbiemri</th>
+                                        <th>Email</th>
+                                        <th>Tel</th>
+                                        <th>Username</th>
+                                        <th>Titulli</th>
+                                        <th>Specializimi</th>
+                                        <th>Statusi</th>
+                                        <th>Departamenti</th>
+                                        <th>Roli</th>
+                                        <th>Edito/Fshije</th>
+                                    </tr>
+                                    </thead>
+
+
+                                    <tbody>
+
+
+                                    <tr th:each="user : ${users}">
+                                        <td th:text="${user.firstName}">Sara</td>
+                                        <td th:text="${user.lastName}">Dobra</td>
+                                        <td th:text="${user.email}">sara@gmail.com</td>
+                                        <td th:text="${user.phoneNr}">04414654</td>
+                                        <td th:text="${user.username}">saradobra</td>
+                                        <td th:text="${user.title}">Doktor</td>
+                                        <td th:text="${user.specialization}">Kirurgji</td>
+                                        <td th:text="${user.active == '1'} ? 'AKTIV' : 'JO AKTIV'">aktiv</td>
+                                        <td th:text="${user.department.departmentName}">Kirurgji</td>
+                                        <td th:text="${user.roles[0].role}">Admin</td>
+
+
+                                        <td><a th:href="@{/user/edit/{id}(id=${user.id})}"><i class="fa fa-edit" style="font-size:20px;color:cornflowerblue; margin-right: 10px;"></i></a><a
+                                                href="#"><i data-toggle="modal" data-target="#deleteModal"
+                                                            th:attr="data-userd=${user.id} +':'+ ${user.firstName} +':'+ ${user.lastName}"
+                                                            class="fa fa-trash-o" style="font-size:20px;color:red"></i></a>
+                                        </td>
+
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Fshije Perdoruesin</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p id="paclabel"></p>
+            </div>
+            <div class="modal-footer">
+                <form id="deleteForm" method="post" action="nothing">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-danger">Fshije</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END Delete Modal -->
+
+<script>
+
+    $('#deleteModal').on('show.bs.modal', function (e) {
+        var user = $(e.relatedTarget).data('userd');
+        console.log("user-->" + user);
+        var user_Id_Emri_Mbiemri = user.split(":");
+        console.log(user_Id_Emri_Mbiemri);
+        var userid = user_Id_Emri_Mbiemri[0];
+        var emri = user_Id_Emri_Mbiemri[1];
+        var mbiemri = "";
+        if (user_Id_Emri_Mbiemri.length == 3) {
+            mbiemri = user_Id_Emri_Mbiemri[2];
+        } else {
+            mbiemri = user_Id_Emri_Mbiemri[3];
+        }
+        console.log("useriD",userid)
+        console.log("Emri",emri)
+        console.log("Mbiemri",mbiemri)
+        document.getElementById("paclabel").innerHTML = "Deshironi ta fshini perdoruesin :" + emri + " " + mbiemri + " ?";
+
+        document.getElementById("deleteForm").action = "/users/deleteUser/" + userid;
+
+    });
+</script>
+<th:block th:replace="common/scripts.html" :: end></th:block>
 </body>
+
 </html>
