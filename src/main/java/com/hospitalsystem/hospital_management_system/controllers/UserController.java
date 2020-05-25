@@ -1,13 +1,9 @@
 package com.hospitalsystem.hospital_management_system.controllers;
 
-import com.hospitalsystem.hospital_management_system.models.Department;
-import com.hospitalsystem.hospital_management_system.models.Role;
-import com.hospitalsystem.hospital_management_system.models.RoleName;
-import com.hospitalsystem.hospital_management_system.models.User;
+import com.hospitalsystem.hospital_management_system.models.*;
 import com.hospitalsystem.hospital_management_system.services.DepartmentService;
 import com.hospitalsystem.hospital_management_system.services.RoleService;
 import com.hospitalsystem.hospital_management_system.services.UserService;
-import org.hibernate.annotations.GeneratorType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -35,6 +31,10 @@ public class UserController {
 
     @Autowired
     private RoleService roleService;
+
+    private String firstThreeCharacters;
+
+    private List<User> allUsers;
 
 
 
@@ -67,7 +67,6 @@ public class UserController {
         model.addAttribute("roles", roleService.getAllRoles());
 
         return "user/add-user";
-
     }
 
     private String[] getTitles(){
@@ -84,6 +83,25 @@ public class UserController {
         role.ifPresent(user::addRole);
         userService.addPatient(user);
         return "redirect:/admin/users";
+    }
+
+    @RequestMapping("/usersAutoComplete")
+    @ResponseBody
+    public List<String> userNameAutoComplete(@RequestParam(value="term", required = false, defaultValue="") String term){
+        List<String> suggestions = new ArrayList<>();
+
+        if(term.length() >= 3){
+            firstThreeCharacters = term;
+            allUsers = userService.fetchUsers(term);
+        }
+
+        for(User user : allUsers){
+            String userNameLastName = user.getFirstName()+" "+user.getLastName();
+            if (userNameLastName.contains(term)) {
+                suggestions.add(user.getFirstName()+" "+user.getLastName());
+            }
+        }
+        return suggestions;
     }
 
 }

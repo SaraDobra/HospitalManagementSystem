@@ -75,10 +75,14 @@ public class User{
     private Set<Visit> visits;
 
     @OneToMany(mappedBy = "user")
+    @EqualsAndHashCode.Exclude
     private Set<Appointment> appointments;
 
     public void addRole(Role role){
         roles.add(role);
     }
 
+    public void addAppointment(Appointment appointment) {
+        appointments.add(appointment);
+    }
 }

@@ -26,4 +26,12 @@ public class UserService {
     public void addPatient(User user) {
         userRepository.save(user);
     }
+
+    public List<User> fetchUsers(String term) {
+        return userRepository.fetchUsers(term);
+    }
+
+    public User findByFirstNameAndLastName(String firstName, String lastName) {
+        return userRepository.findByFirstNameAndLastName(firstName,lastName);
+    }
 }

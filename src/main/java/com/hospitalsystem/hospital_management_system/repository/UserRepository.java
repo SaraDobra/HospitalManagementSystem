@@ -2,8 +2,16 @@ package com.hospitalsystem.hospital_management_system.repository;
 
 import com.hospitalsystem.hospital_management_system.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import java.util.List;
 
 public interface UserRepository extends JpaRepository<User,Long> {
 
     User findByEmail(String email);
+
+    @Query("SELECT u from User u where u.firstName LIKE %:term% or u.lastName LIKE %:term%")
+    List<User> fetchUsers(String term);
+
+    User findByFirstNameAndLastName(String firstName, String lastName);
 }

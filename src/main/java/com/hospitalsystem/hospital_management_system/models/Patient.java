@@ -45,4 +45,8 @@ public class Patient {
 
     @OneToMany(mappedBy = "patient")
     private Set<Appointment> appointments;
+
+    public void addAppointment(Appointment appointment) {
+        appointments.add(appointment);
+    }
 }

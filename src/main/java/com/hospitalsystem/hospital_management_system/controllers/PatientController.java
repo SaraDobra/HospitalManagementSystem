@@ -11,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -18,10 +19,14 @@ import java.util.List;
 public class PatientController {
 
     @Autowired
-    PatientRepository patientRepository;
+    private PatientRepository patientRepository;
 
     @Autowired
-    PatientService patientService;
+   private PatientService patientService;
+
+    private List<Patient> allPatients;
+
+    private String firstThreeCharacters;
 
     @GetMapping("/patients")
     public String showPacients(Model model){
@@ -67,6 +72,25 @@ public class PatientController {
 
         patientService.savePatient(patient);
         return "redirect:/patient/patients";
+    }
+
+    @RequestMapping("/patientsAutoComplete")
+    @ResponseBody
+    public List<String> patientNamesAutoComplete(@RequestParam(value="term", required = false, defaultValue="") String term){
+        List<String> suggestions = new ArrayList<>();
+
+        if(term.length() >= 3){
+            firstThreeCharacters = term;
+            allPatients = patientService.fetchPatients(term);
+        }
+
+        for(Patient patient : allPatients){
+            String patientNameLastName = patient.getFirstName()+" "+patient.getLastName();
+            if (patientNameLastName.contains(term)) {
+                suggestions.add(patient.getFirstName()+" "+patient.getLastName());
+            }
+        }
+        return suggestions;
     }
 
 }

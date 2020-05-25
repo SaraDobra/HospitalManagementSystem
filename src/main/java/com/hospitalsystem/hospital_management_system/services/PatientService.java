@@ -15,8 +15,6 @@ public class PatientService {
     @Autowired
     PatientRepository patientRepository;
 
-
-
     public void addPatient(Patient patient){
         patientRepository.save(patient);
     }
@@ -32,5 +30,13 @@ public class PatientService {
 
     public void savePatient(Patient patient) {
         patientRepository.save(patient);
+    }
+
+    public List<Patient> fetchPatients(String term) {
+      return   patientRepository.fetchPatients(term);
+    }
+
+    public Patient findByNameAndLastName(String firstName, String lastName) {
+       return patientRepository.findByFirstNameAndLastName(firstName,lastName);
     }
 }
