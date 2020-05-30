@@ -18,8 +18,10 @@ public class Appointment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
     private Date date;
 
+    @DateTimeFormat(pattern = "HH:mm")
     private Time time;
 
     private String title;

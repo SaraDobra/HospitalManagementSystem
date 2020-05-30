@@ -1,9 +1,8 @@
 package com.hospitalsystem.hospital_management_system.controllers;
 
-import com.hospitalsystem.hospital_management_system.models.Appointment;
-import com.hospitalsystem.hospital_management_system.models.Patient;
-import com.hospitalsystem.hospital_management_system.models.User;
+import com.hospitalsystem.hospital_management_system.models.*;
 import com.hospitalsystem.hospital_management_system.services.AppointmentService;
+import com.hospitalsystem.hospital_management_system.services.HelperService;
 import com.hospitalsystem.hospital_management_system.services.PatientService;
 import com.hospitalsystem.hospital_management_system.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +18,8 @@ import java.sql.Date;
 import java.sql.Time;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping("/appointment")
@@ -33,9 +34,24 @@ public class AppointmentController {
     @Autowired
     private AppointmentService appointmentService;
 
+    @Autowired
+    private HelperService helperService;
+
     @GetMapping("/appointments")
     public String  showAllAppointments(Model model){
-
+        User loggedUser = helperService.getLoggedUser();
+        List<Appointment> appointments = new ArrayList<>();
+        Role userRole = null;
+        for(Role r : loggedUser.getRoles()){
+            userRole = r;
+        }
+        if((userRole.getRole().toString().equals(RoleName.ADMIN.toString())) || (userRole.getRole().toString().equals(RoleName.RECEPTIONIST.toString()))){
+            appointments = appointmentService.getAllAppointments();
+            model.addAttribute("appointments",appointments);
+            return "/appointment/appointments";
+        }
+        appointments = appointmentService.getAppointmentsByUser(loggedUser);
+        model.addAttribute("appointments",appointments);
         return "/appointment/appointments";
     }
 
@@ -72,6 +88,7 @@ public class AppointmentController {
         System.out.println("---->>>Appointment:"+appointment.toString());
         appointmentService.addAppointment(appointment);
 
-       return "redirect:/admin/users";
+       return "redirect:/appointment/appointments";
     }
+
 }

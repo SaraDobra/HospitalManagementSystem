@@ -85,4 +85,8 @@ public class User{
     public void addAppointment(Appointment appointment) {
         appointments.add(appointment);
     }
+
+    public String fullName(){
+        return firstName + " "+lastName;
+    }
 }

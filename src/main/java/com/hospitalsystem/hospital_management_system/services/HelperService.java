@@ -26,4 +26,10 @@ public class HelperService{
 
     }
 
+    public User getLoggedUser(){
+        Authentication loggedInUser = SecurityContextHolder.getContext().getAuthentication();
+        String email = loggedInUser.getName();
+        User user = userRepository.findByEmail(email);
+        return user;
+    }
 }

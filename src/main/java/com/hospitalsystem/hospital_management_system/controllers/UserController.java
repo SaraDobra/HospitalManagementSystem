@@ -37,8 +37,6 @@ public class UserController {
     private List<User> allUsers;
 
 
-
-
     @RequestMapping(value= {"/", "/login"}, method= RequestMethod.GET)
     public ModelAndView login() {
         ModelAndView model = new ModelAndView();

@@ -1,9 +1,12 @@
 package com.hospitalsystem.hospital_management_system.services;
 
 import com.hospitalsystem.hospital_management_system.models.Appointment;
+import com.hospitalsystem.hospital_management_system.models.User;
 import com.hospitalsystem.hospital_management_system.repository.AppointmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class AppointmentService {
@@ -13,5 +16,13 @@ public class AppointmentService {
 
     public void addAppointment(Appointment appointment){
         appointmentRepository.save(appointment);
+    }
+
+    public List<Appointment> getAllAppointments() {
+        return appointmentRepository.findAll();
+    }
+
+    public List<Appointment> getAppointmentsByUser(User loggedUser) {
+        return appointmentRepository.findByUser(loggedUser);
     }
 }
