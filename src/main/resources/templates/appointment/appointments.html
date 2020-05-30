@@ -98,30 +98,30 @@
 </div>
 <!-- END Delete Modal -->
 
-<!--<script>-->
+<script>
 
-<!--    $('#deleteModal').on('show.bs.modal', function (e) {-->
-<!--        var user = $(e.relatedTarget).data('userd');-->
-<!--        console.log("user&ndash;&gt;" + user);-->
-<!--        var user_Id_Emri_Mbiemri = user.split(":");-->
-<!--        console.log(user_Id_Emri_Mbiemri);-->
-<!--        var userid = user_Id_Emri_Mbiemri[0];-->
-<!--        var emri = user_Id_Emri_Mbiemri[1];-->
-<!--        var mbiemri = "";-->
-<!--        if (user_Id_Emri_Mbiemri.length == 3) {-->
-<!--            mbiemri = user_Id_Emri_Mbiemri[2];-->
-<!--        } else {-->
-<!--            mbiemri = user_Id_Emri_Mbiemri[3];-->
-<!--        }-->
-<!--        console.log("useriD",userid)-->
-<!--        console.log("Emri",emri)-->
-<!--        console.log("Mbiemri",mbiemri)-->
-<!--        document.getElementById("paclabel").innerHTML = "Deshironi ta fshini perdoruesin :" + emri + " " + mbiemri + " ?";-->
+    $('#deleteModal').on('show.bs.modal', function (e) {
+        var user = $(e.relatedTarget).data('userd');
+        console.log("user-->" + user);
+        var user_Id_Emri_Mbiemri = user.split(":");
+        console.log(user_Id_Emri_Mbiemri);
+        var userid = user_Id_Emri_Mbiemri[0];
+        var emri = user_Id_Emri_Mbiemri[1];
+        var mbiemri = "";
+        if (user_Id_Emri_Mbiemri.length == 3) {
+            mbiemri = user_Id_Emri_Mbiemri[2];
+        } else {
+            mbiemri = user_Id_Emri_Mbiemri[3];
+        }
+        console.log("useriD",userid)
+        console.log("Emri",emri)
+        console.log("Mbiemri",mbiemri)
+        document.getElementById("paclabel").innerHTML = "Deshironi ta fshini perdoruesin :" + emri + " " + mbiemri + " ?";
 
-<!--        document.getElementById("deleteForm").action = "/users/deleteUser/" + userid;-->
+        document.getElementById("deleteForm").action = "/users/deleteUser/" + userid;
 
-<!--    });-->
-<!--</script>-->
+    });
+</script>
 <th:block th:replace="common/scripts.html" :: end></th:block>
 </body>
 

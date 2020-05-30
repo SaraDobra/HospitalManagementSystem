@@ -89,8 +89,7 @@
 </div>
 
 <!-- Delete Modal -->
-<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel"
-     aria-hidden="true">
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true" >
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -115,8 +114,8 @@
 
 <script>
 
-    var pacid = '';
     $('#deleteModal').on('show.bs.modal', function (e) {
+
         var pac = $(e.relatedTarget).data('patientd');
         console.log("patinet-->" + pac);
         var pac_Id_Emri_Mbiemri = pac.split(":");
@@ -130,8 +129,8 @@
             mbiemri = pac_Id_Emri_Mbiemri[3];
         }
         console.log(pacid);
-        document.getElementById("paclabel").innerHTML = "Deshironi ta fshini pacientin :" + emri + " " + mbiemri + " ?";
-
+        document.getElementById("paclabel").innerHTML = "Deshironi ta fshini pacientin :" + emri + " " + mbiemri + " ? " +
+            "<br />"+"Te gjitha te dhenat ne lidhje me ket pacient do te fshihen !";
         document.getElementById("deleteForm").action = "/patient/deletePatient/" + pacid;
 
     });

@@ -40,10 +40,10 @@ public class Patient {
 
     private String note;
 
-    @OneToMany(mappedBy = "patient")
+    @OneToMany(mappedBy = "patient",cascade = CascadeType.ALL)
     private Set<Visit> visits;
 
-    @OneToMany(mappedBy = "patient")
+    @OneToMany(mappedBy = "patient" ,cascade = CascadeType.ALL)
     private Set<Appointment> appointments;
 
     public void addAppointment(Appointment appointment) {
