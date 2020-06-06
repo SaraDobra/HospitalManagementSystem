@@ -29,4 +29,9 @@ public class HomeController {
         model.setViewName("errors/access_denied");
         return model;
     }
+
+    @GetMapping("/history")
+    public String showHistory(){
+        return "history";
+    }
 }

@@ -2,8 +2,10 @@ package com.hospitalsystem.hospital_management_system.controllers;
 
 
 import com.hospitalsystem.hospital_management_system.models.Patient;
+import com.hospitalsystem.hospital_management_system.models.Visit;
 import com.hospitalsystem.hospital_management_system.repository.PatientRepository;
 import com.hospitalsystem.hospital_management_system.services.PatientService;
+import com.hospitalsystem.hospital_management_system.services.VisitService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/patient")
@@ -25,6 +28,9 @@ public class PatientController {
    private PatientService patientService;
 
     private List<Patient> allPatients;
+
+    @Autowired
+    private VisitService visitService;
 
     private String firstThreeCharacters;
 
@@ -92,5 +98,29 @@ public class PatientController {
         }
         return suggestions;
     }
+
+    @GetMapping("/details/{id}")
+    public String showPatientDetails(@PathVariable("id") long id,Model model){
+        Patient patient = patientRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid patient Id:" + id));
+        System.out.println("visits");
+        for(Visit visit: patient.getVisits()){
+            System.out.println(visit);
+        }
+        model.addAttribute("patient",patient);
+        return "patient-details";
+    }
+
+    @GetMapping("/details/{patientId}/visit/{visitId}")
+    public String showPatientVisit(@PathVariable("patientId") long patientId,@PathVariable("visitId") long visitId,Model model){
+        Patient patient = patientRepository.findById(patientId).orElseThrow(() -> new IllegalArgumentException("Invalid patient Id:" + patientId));
+        Optional<Visit> visit = visitService.getVisitById(visitId);
+        if(visit.isPresent()){
+            System.out.println(visit.toString());
+        }
+        model.addAttribute("patient",patient);
+        return "patient-details";
+    }
+
+
 
 }

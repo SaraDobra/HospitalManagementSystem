@@ -72,6 +72,8 @@ public class User{
     private Department department;
 
     @OneToMany(mappedBy = "user")
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     private Set<Visit> visits;
 
     @OneToMany(mappedBy = "user")

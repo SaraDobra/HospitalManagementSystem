@@ -2955,7 +2955,9 @@ ul.user_data li {
     margin-bottom: 6px
 }
 ul.user_data li p {
-    margin-bottom: 0
+    margin-bottom: 0;
+    margin-left: 30px;
+
 }
 ul.user_data li .progress {
     width: 90%

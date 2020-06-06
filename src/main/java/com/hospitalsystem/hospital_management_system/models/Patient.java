@@ -40,7 +40,7 @@ public class Patient {
 
     private String note;
 
-    @OneToMany(mappedBy = "patient",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "patient",cascade = CascadeType.ALL ,fetch = FetchType.EAGER)
     private Set<Visit> visits;
 
     @OneToMany(mappedBy = "patient" ,cascade = CascadeType.ALL)

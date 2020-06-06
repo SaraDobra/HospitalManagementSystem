@@ -3279,7 +3279,12 @@ ul.user_data li {
 }
 
 ul.user_data li p {
-    margin-bottom: 0
+    margin-bottom: 0;
+    font-size:13px;
+    margin-right: 60px;
+    display:inline;
+    float: right;
+
 }
 
 ul.user_data li .progress {
