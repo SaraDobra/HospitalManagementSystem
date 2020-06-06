@@ -1185,7 +1185,8 @@ h2 {
     padding: 0 5px 6px;
     float: left;
     clear: both;
-    margin-top: 5px
+    margin-top: 5px;
+    background-color: #ECF0F5;
 }
 
 .x_content h4 {

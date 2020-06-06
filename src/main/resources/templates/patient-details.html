@@ -14,7 +14,8 @@
             <div class="">
                 <div class="page-title">
                     <div class="title_left">
-                        <h3>Home/<small>Pacient Detaje</small>
+                        <h3>Home/
+                            <small>Pacient Detaje</small>
                         </h3>
                     </div>
 
@@ -29,58 +30,78 @@
                 <div class="row">
                     <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="x_panel">
-                            <div class="x_title">
+                            <div class="x_title" th:object="${patient}">
                                 <h2>Profili Pacientit</h2>
-                                <h2 style="margin-left: 20%" >Historia e Vizitave</h2>
-                               <div class="clearfix"></div>
+                                <h2 style="margin-left: 20%">Historia e Vizitave</h2>
+                                <h2 style="margin-left: 30%">Vizita Detaje</h2>
+                                <a  th:href="@{/patient/{patientId}/visit/addVisit (patientId=${patient.id})}" class="nav navbar-nav navbar-right" style="margin-right: 35px">
+                                    <button type="button" class="btn btn-round btn-info"
+                                            style=" background-color: #1abb9c ;margin-left: 40%"><i
+                                            class="fa fa-history" style="margin-right: 10px"></i>Shto Ekzaminim
+                                    </button>
+                                </a>
+                                <div class="clearfix"></div>
                             </div>
-                            <div class="x_content"  th:object="${patient}" >
-                                <div class="col-md-3 col-sm-3 col-xs-12 profile_left" >
-                                    <div class="profile_img">
+                            <div class="x_content" >
+
+                                <div class="col-md-3 col-sm-3 col-xs-12 profile_left" style="background-color: white; width: 20%;" >
+                                    <div class="profile_img" style=";margin-left: 5%;">
                                         <div id="crop-avatar">
                                             <!-- Current avatar -->
-                                            <img class="img-responsive avatar-view" src="/images/user.png" alt="Avatar" title="Change the avatar">
+                                            <img class="img-responsive avatar-view" src="/images/user.png" alt="Avatar"
+                                                 title="Change the avatar">
                                         </div>
                                     </div>
                                     <h3 th:text="${patient.firstName} + ' '+ ${patient.lastName}"></h3>
 
-                                    <ul class=":list-unstyled user_data" style="padding-left: 0px;">
+                                    <ul class=":list-unstyled user_data" style="padding-left: 0px;margin-bottom: 40px">
                                         <li>
-                                         <b>ID</b> <p th:text="${patient.idNr}"></p>
+                                            <b>ID</b>
+                                            <p th:text="${patient.idNr}"></p>
                                         </li>
 
                                         <li>
-                                            <b>Emri</b> <p th:text="${patient.firstName}"></p>
+                                            <b>Emri</b>
+                                            <p th:text="${patient.firstName}"></p>
                                         </li>
                                         <li>
-                                            <b>Mbiemri</b> <p th:text="${patient.lastName}"></p>
+                                            <b>Mbiemri</b>
+                                            <p th:text="${patient.lastName}"></p>
                                         </li>
                                         <li>
-                                            <b>Email</b> <p th:text="${patient.email}"></p>
+                                            <b>Email</b>
+                                            <p th:text="${patient.email}"></p>
                                         </li>
                                         <li>
-                                            <b>Data Lindjes</b> <p th:text="${patient.birthDate}"></p>
+                                            <b>Data Lindjes</b>
+                                            <p th:text="${patient.birthDate}"></p>
                                         </li>
                                         <li>
-                                            <b>Tel</b> <p th:text="${patient.phoneNr}"></p>
+                                            <b>Tel</b>
+                                            <p th:text="${patient.phoneNr}"></p>
                                         </li>
                                         <li>
-                                            <b>Adresa</b> <p th:text="${patient.address}"></p>
+                                            <b>Adresa</b>
+                                            <p th:text="${patient.address}"></p>
                                         </li>
                                         <li>
-                                            <b>Qyteti</b> <p th:text="${patient.city}"></p>
+                                            <b>Qyteti</b>
+                                            <p th:text="${patient.city}"></p>
                                         </li>
                                         <li>
-                                            <b>Shteti</b> <p th:text="${patient.country}"></p>
+                                            <b>Shteti</b>
+                                            <p th:text="${patient.country}"></p>
                                         </li>
                                     </ul>
 
-                                    <a th:href="@{/patient/edit/{id}(id=${patient.id})}" class="btn btn-success"><i class="fa fa-edit m-right-xs" ></i>Edito Profilin</a>
+                                    <a th:href="@{/patient/edit/{id}(id=${patient.id})}" class="btn btn-success"><i
+                                            class="fa fa-edit m-right-xs"></i>Edito Profilin</a>
                                     <br>
 
                                 </div>
 
-                                <table id="datatable-buttons" class="table table-striped table-bordered" style="clear: both; display: inline;height: auto;" >
+                                <table id="datatable-buttons" class="table table-striped table-bordered"
+                                       style="clear: both; display: inline;height: auto; background-color: white ;margin-left: 3%;padding-top: 25px" >
                                     <thead>
                                     <tr>
                                         <th>Data</th>
@@ -94,11 +115,75 @@
                                     <tr th:each="visit : ${patient.visits}">
                                         <td th:text="${#dates.format(visit.date, 'dd-MM-yyyy')}">13-03-2020</td>
                                         <td th:text="${visit.user.fullName()}">Sara Dobra</td>
-                                        <td> <a th:href="@{/patient/details/{patientId}/visit/{visitId}(patientId=${patient.id},visitId=${visit.id})}"><i class="fa fa-eye" style="font-size:20px; margin-left: 10px"></i></a ></td>
+                                        <td>
+                                            <a th:href="@{/patient/details/{patientId}/visit/{visitId}(patientId=${patient.id},visitId=${visit.id})}"><i
+                                                    class="fa fa-eye" style="font-size:20px; margin-left: 10px"></i></a>
+                                        </td>
 
                                     </tr>
                                     </tbody>
                                 </table>
+
+                                <!--                                Visit Details Start-->
+
+                                <ul th:if="${visitPac != null}" th:object="${visitPac}" class="list-group"
+                                    style="width: 50% ;height: auto; float: right; margin-right: 20px" >
+                                    <li class="list-group-item disabled">Historia E Vizites
+                                        <p>Data: <span th:text="${#dates.format(visitPac.date, 'dd-MM-yyyy')}":></span></p>
+                                        <p >Kontrolluar nga:  <span th:text="${visitPac.user.fullName()}"></span></p>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div>
+                                            <b>Pershkrimi</b>
+                                            <hr>
+                                            <p th:text="${visitPac.description}"></p>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div>
+                                            <b>Ekzaminimi</b>
+                                            <hr>
+                                            <p th:text="${visitPac.examination}"></p>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div>
+                                            <b>Anemneza</b>
+                                            <hr>
+                                            <p th:text="${visitPac.anamneza}"></p>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div>
+                                            <b>Diagnoza</b>
+                                            <hr>
+                                            <p th:text="${visitPac.diagnosis}"></p>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div>
+                                            <b>Rekomandimi</b>
+                                            <hr>
+                                            <p th:text="${visitPac.recomandation}"></p>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div>
+                                            <b>Medikamentet</b>
+                                            <hr>
+                                            <p th:text="${visitPac.medicaments}"></p>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div>
+                                            <b>Udhezimi</b>
+                                            <hr>
+                                            <p th:text="${visitPac.instructions}"></p>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <!--                                Visit Details End-->
+
                             </div>
                         </div>
                     </div>

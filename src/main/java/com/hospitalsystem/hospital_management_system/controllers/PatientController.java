@@ -116,6 +116,7 @@ public class PatientController {
         Optional<Visit> visit = visitService.getVisitById(visitId);
         if(visit.isPresent()){
             System.out.println(visit.toString());
+            model.addAttribute("visitPac",visit.get());
         }
         model.addAttribute("patient",patient);
         return "patient-details";
