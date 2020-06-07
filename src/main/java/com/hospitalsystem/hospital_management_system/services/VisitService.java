@@ -16,4 +16,8 @@ public class VisitService {
     public Optional<Visit> getVisitById(long id){
         return visitRepository.findById(id);
     }
+
+    public void addVisit(Visit visit) {
+        visitRepository.save(visit);
+    }
 }

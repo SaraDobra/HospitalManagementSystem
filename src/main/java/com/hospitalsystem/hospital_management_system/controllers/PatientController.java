@@ -4,6 +4,7 @@ package com.hospitalsystem.hospital_management_system.controllers;
 import com.hospitalsystem.hospital_management_system.models.Patient;
 import com.hospitalsystem.hospital_management_system.models.Visit;
 import com.hospitalsystem.hospital_management_system.repository.PatientRepository;
+import com.hospitalsystem.hospital_management_system.services.HelperService;
 import com.hospitalsystem.hospital_management_system.services.PatientService;
 import com.hospitalsystem.hospital_management_system.services.VisitService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,6 +36,9 @@ public class PatientController {
     private VisitService visitService;
 
     private String firstThreeCharacters;
+
+    @Autowired
+    private HelperService helperService;
 
     @GetMapping("/patients")
     public String showPacients(Model model){
@@ -122,6 +128,31 @@ public class PatientController {
         return "patient-details";
     }
 
+    @GetMapping("/details/{patientId}/visit/addVisit")
+    public String showAddVisit(@PathVariable("patientId") long patientId, Model model){
+        Patient patient = patientRepository.findById(patientId).orElseThrow(() -> new IllegalArgumentException("Invalid patient Id:" + patientId));
+        model.addAttribute("patient",patient);
+        Visit visit = new Visit();
+        model.addAttribute("visit",visit);
+        return "visit-add";
+    }
+
+
+    @PostMapping("/details/addVisit/{patientId}")
+    public String addVisit(@PathVariable("patientId") long patientId,@ModelAttribute("visit") Visit visit,Model model){
+        Patient patient = patientRepository.findById(patientId).orElseThrow(() -> new IllegalArgumentException("Invalid patient Id:" + patientId));
+        visit.setPatient(patient);
+        visit.setUser(helperService.getLoggedUser());
+        System.out.println("<<<<<<<<<<<<<<<<<<<<<");
+        System.out.println(visit.getPatient());
+        patient.addVisit(visit);
+        helperService.getLoggedUser().addVisit(visit);
+        Date date = new Date();
+        visit.setDate(date);
+        visitService.addVisit(visit);
+        model.addAttribute("patient",visit.getPatient());
+        return "patient-details";
+    }
 
 
 }

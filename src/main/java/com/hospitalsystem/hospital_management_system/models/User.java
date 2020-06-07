@@ -91,4 +91,8 @@ public class User{
     public String fullName(){
         return firstName + " "+lastName;
     }
+
+    public void addVisit(Visit visit) {
+        visits.add(visit);
+    }
 }

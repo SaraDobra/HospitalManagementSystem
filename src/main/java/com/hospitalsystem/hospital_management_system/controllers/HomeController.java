@@ -30,8 +30,4 @@ public class HomeController {
         return model;
     }
 
-    @GetMapping("/history")
-    public String showHistory(){
-        return "history";
-    }
 }

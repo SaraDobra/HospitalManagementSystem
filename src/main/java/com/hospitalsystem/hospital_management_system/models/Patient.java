@@ -54,4 +54,7 @@ public class Patient {
         return firstName + " "+lastName;
     }
 
+    public void addVisit(Visit visit) {
+        visits.add(visit);
+    }
 }

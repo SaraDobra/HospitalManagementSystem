@@ -16,6 +16,7 @@ public class Visit {
     private Long id;
 
     @DateTimeFormat(pattern = "dd-MM-yyyy")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date date;
 
     private String description;
