@@ -14,7 +14,7 @@
             <div class="">
                 <div class="page-title">
                     <div class="title_left">
-                        <h3>Home/<small>Regjistro Perdorues</small>
+                        <h3>Home/<small>Regjistro Përdorues</small>
                         </h3>
                     </div>
 
@@ -30,14 +30,14 @@
                     <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="x_panel">
                             <div class="x_title">
-                                <h2>Regjistro Perdoruesin</h2>
+                                <h2>Regjistro Përdoruesin</h2>
 
                                 <div class="clearfix"></div>
                             </div>
                             <div class="x_content">
 
 
-                                <form  class="form-horizontal form-label-left" method="POST"  th:action="@{/admin/addUser}" th:object="${user}" novalidate >
+                                <form  class="form-horizontal form-label-left" method="POST"  th:action="@{/admin/addUser}" th:object="${user}" novalidate style="margin-top: 10px">
 
                                     <div class="item form-group">
                                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="firstName">Emri <span class="required">*</span>
@@ -89,18 +89,6 @@
                                         </div>
                                     </div>
 
-                                    <div class="item form-group">
-                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" >Titulli <span class="required">*</span>
-                                        </label>
-                                        <div class="col-md-6 col-sm-6 col-xs-12">
-                                            <select th:field="*{title}">
-                                                <option
-                                                        th:each="t: ${titles}"
-                                                        th:value="${t}"
-                                                        th:text="${t}" ></option>
-                                            </select>
-                                        </div>
-                                    </div>
 
                                     <div class="item form-group">
                                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="specialization">Specializimi <span class="required">*</span>
@@ -140,7 +128,7 @@
                                     <div class="ln_solid"></div>
                                     <div class="form-group">
                                         <div class="col-md-6 col-md-offset-3">
-                                            <button  class="btn btn-primary" type="reset">Cancel</button>
+                                            <button  class="btn btn-primary" type="reset">Anulo</button>
                                             <button id="send" type="submit" class="btn btn-success">Regjistro</button>
                                         </div>
                                     </div>

@@ -1,7 +1,7 @@
 <div class="col-md-3 left_col" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
     <div class="left_col scroll-view">
-        <span style="font-size: 20px;color: aliceblue; text-align: center; padding: 10px">Hospital Menagement</span>
-        <span style="font-size: 20px;color: aliceblue; text-align: center; padding: 25%" >System</span>
+        <span style="font-size: 20px;color: aliceblue; text-align: center; padding: 10px ;"><b>Hospital Menagement</b></span>
+        <span style="font-size: 20px;color: aliceblue; text-align: center; padding: 25%" ><b>System</b></span>
         <div class="navbar nav_title" style="border: 0;">
             <a   href="/dashboard" class="site_title"><img src="/images/hospital-logo.png" style="margin-left: 40px;" alt=""> </a>
 
@@ -35,15 +35,27 @@
 
                         </ul>
                     </li>
-                    <li><a><i class="fa fa-users"></i> Pacientet <span class="fa fa-chevron-down"></span></a>
+                    <li><a><i class="fa fa-users"></i> Pacientët <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
-                            <li><a href="/patient/patients">Lista e Pacienteve</a></li>
+                            <li><a href="/patient/patients">Lista e Pacientëve</a></li>
                             <li><a href="/patient/addPatient">Shto Pacient</a></li>
 
                         </ul>
                     </li>
-                    <li><a href="/appointment/appointments"><i class="fa fa-calendar"></i>Terminet<span class="fa fa-chevron-down"></span></a></li>
-                    <li><a href="/admin/users"><i class="fa fa-user-md"></i>Perdoruesit<span class="fa fa-chevron-down"></span></a></li>
+                    <li><a href="/appointment/appointments"><i class="fa fa-calendar"></i>Terminet<span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                            <li><a href="/appointment/appointments">Lista e Termineve</a></li>
+                            <li><a href="/appointment/addAppointment">Shto Termin</a></li>
+
+                        </ul>
+                    </li>
+                    <li><a href="/admin/users"><i class="fa fa-user-md"></i>Përdoruesit<span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                            <li><a href="/admin/users">Lista e Përdoruesve</a></li>
+                            <li><a href="/admin/addUser">Shto Përdorues</a></li>
+
+                        </ul>
+                    </li>
 
                 </ul>
             </div>

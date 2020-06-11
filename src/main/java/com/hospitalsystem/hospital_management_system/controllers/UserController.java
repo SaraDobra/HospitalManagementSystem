@@ -15,6 +15,8 @@ import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Controller
 public class UserController {
@@ -62,7 +64,8 @@ public class UserController {
         model.addAttribute("user",user);
         model.addAttribute("departments",departmentService.getAllDepartments());
         model.addAttribute("titles",getTitles());
-        model.addAttribute("roles", roleService.getAllRoles());
+        Stream<Role> roles = roleService.getAllRoles().stream().filter(role -> !role.getRole().name().equals(RoleName.ADMIN.name()));
+        model.addAttribute("roles", roles.collect(Collectors.toList()));
 
         return "user/add-user";
     }
@@ -95,8 +98,6 @@ public class UserController {
 
 
         for(User user : allUsers){
-            String rolename = RoleName.DOCTOR.name();
-            String role = user.getRole();
             String userNameLastName = user.getFirstName()+" "+user.getLastName();
             if (userNameLastName.contains(term) && user.getRole().equals(RoleName.DOCTOR.name())) {
                 suggestions.add(user.getFirstName()+" "+user.getLastName());

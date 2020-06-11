@@ -1,3 +1,15 @@
+
+@media print {
+    #printV {
+        text-align : center;
+        align-content: center;
+    }
+
+    #printVizit , #printVizit > i  {
+        visibility: hidden;
+    }
+}
+
 .x_title h2, table.tile_info td p {
     white-space: nowrap;
     text-overflow: ellipsis

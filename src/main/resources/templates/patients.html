@@ -15,7 +15,7 @@
                 <div class="page-title">
                     <div class="title_left">
                         <h3>Home
-                            <small>/pacientet</small>
+                            <small>/Pacientët</small>
                         </h3>
                     </div>
 
@@ -23,7 +23,7 @@
                     <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="x_panel">
                             <div class="x_title">
-                                <h2>Pacientet</h2>
+                                <h2>Pacientët</h2>
 
                                 <div class="clearfix"></div>
                             </div>
@@ -72,7 +72,8 @@
                                                 href="#"><i data-toggle="modal" data-target="#deleteModal"
                                                             th:attr="data-patientd=${patient.idNr} +':'+ ${patient.firstName} +':'+ ${patient.lastName}"
                                                             class="fa fa-trash-o" style="font-size:20px;color:red"></i></a>
-                                            <a th:href="@{/patient/details/{id}(id=${patient.id})}"><i class="fa fa-eye" style="font-size:20px; margin-left: 10px"></i></a>
+                                            <a th:href="@{/patient/details/{id}(id=${patient.id})}"  data-toggle="tooltip" data-placement="left" title="Shiko profilin dhe vizitat"><i class="fa fa-user" style="font-size:20px; margin-left: 10px"></i></a>
+                                            <a th:href="@{/patient/details/{patientId}/visit/addVisit (patientId=${patient.id})}"  data-toggle="tooltip" data-placement="left" title="Shto vizit"><i class="fa fa-hospital-o" style="font-size:20px; margin-left: 10px"></i></a>
                                         </td>
 
                                     </tr>
@@ -104,7 +105,7 @@
             </div>
             <div class="modal-footer">
                 <form id="deleteForm" method="post" action="nothing">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Anulo</button>
                     <button type="submit" class="btn btn-danger">Fshije</button>
                 </form>
             </div>
