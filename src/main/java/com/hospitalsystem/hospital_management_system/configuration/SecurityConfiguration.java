@@ -44,6 +44,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/login").permitAll()
                 .antMatchers("/signup").permitAll()
                 .antMatchers("/admin/**").hasAuthority("ADMIN")
+                .antMatchers("/patient/details/**").hasAnyAuthority("ADMIN","DOCTOR")
                 .antMatchers("/patient/**").hasAnyAuthority("ADMIN","DOCTOR","RECEPTIONIST")
                 .antMatchers("/home/**").hasAnyAuthority("ADMIN","DOCTOR","RECEPTIONIST").anyRequest()
                 .authenticated().and().csrf().disable()
@@ -64,7 +65,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     public PersistentTokenRepository persistentTokenRepository() {
         JdbcTokenRepositoryImpl db = new JdbcTokenRepositoryImpl();
         db.setDataSource(dataSource);
-
         return db;
     }
 }

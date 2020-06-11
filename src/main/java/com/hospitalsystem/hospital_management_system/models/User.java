@@ -95,4 +95,8 @@ public class User{
     public void addVisit(Visit visit) {
         visits.add(visit);
     }
+
+    public String getRole(){
+        return roles.stream().findFirst().get().getRole().name();
+    }
 }

@@ -93,9 +93,12 @@ public class UserController {
             allUsers = userService.fetchUsers(term);
         }
 
+
         for(User user : allUsers){
+            String rolename = RoleName.DOCTOR.name();
+            String role = user.getRole();
             String userNameLastName = user.getFirstName()+" "+user.getLastName();
-            if (userNameLastName.contains(term)) {
+            if (userNameLastName.contains(term) && user.getRole().equals(RoleName.DOCTOR.name())) {
                 suggestions.add(user.getFirstName()+" "+user.getLastName());
             }
         }
