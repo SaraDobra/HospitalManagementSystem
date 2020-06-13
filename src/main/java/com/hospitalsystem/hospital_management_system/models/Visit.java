@@ -38,7 +38,9 @@ public class Visit {
     @ToString.Exclude
     private Patient patient;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     private User user;
 
 

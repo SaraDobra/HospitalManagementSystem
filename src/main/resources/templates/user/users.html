@@ -42,7 +42,6 @@
                                         <th>Email</th>
                                         <th>Tel</th>
                                         <th>Username</th>
-                                        <th>Titulli</th>
                                         <th>Specializimi</th>
                                         <th>Statusi</th>
                                         <th>Departamenti</th>
@@ -61,7 +60,6 @@
                                         <td th:text="${user.email}">sara@gmail.com</td>
                                         <td th:text="${user.phoneNr}">04414654</td>
                                         <td th:text="${user.username}">saradobra</td>
-                                        <td th:text="${user.title}">Doktor</td>
                                         <td th:text="${user.specialization}">Kirurgji</td>
                                         <td th:text="${user.active == '1'} ? 'AKTIV' : 'JO AKTIV'">aktiv</td>
                                         <td th:text="${user.department.departmentName}">Kirurgji</td>
@@ -120,7 +118,7 @@
         console.log("user-->" + user);
         var user_Id_Emri_Mbiemri = user.split(":");
         console.log(user_Id_Emri_Mbiemri);
-        var userid = user_Id_Emri_Mbiemri[0];
+        var userId = user_Id_Emri_Mbiemri[0];
         var emri = user_Id_Emri_Mbiemri[1];
         var mbiemri = "";
         if (user_Id_Emri_Mbiemri.length == 3) {
@@ -128,13 +126,13 @@
         } else {
             mbiemri = user_Id_Emri_Mbiemri[3];
         }
-        console.log("useriD",userid)
+        console.log("useriD",userId)
         console.log("Emri",emri)
         console.log("Mbiemri",mbiemri)
-        document.getElementById("paclabel").innerHTML = "Deshironi ta fshini perdoruesin :" + emri + " " + mbiemri + " ?";+
+        document.getElementById("paclabel").innerHTML = "Deshironi ta fshini perdoruesin :" + emri + " " + mbiemri + " ?"+
             "<br />"+"Te gjitha te dhenat ne lidhje me ket perdorues do te fshihen !";
 
-        document.getElementById("deleteForm").action = "/users/deleteUser/" + userid;
+        document.getElementById("deleteForm").action = "/admin/deleteUser/" + userId;
 
     });
 </script>

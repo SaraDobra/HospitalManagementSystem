@@ -58,20 +58,21 @@ public class UserController {
 
     }
 
+    @RequestMapping( value = "/admin/deleteUser/{userId}", method = RequestMethod.POST )
+    public String deleteUserById(@PathVariable( "userId" ) String userId) {
+        userService.deleteUserById(userId);
+        return "redirect:/admin/users";
+    }
+
     @GetMapping("/admin/addUser")
     public String showaddUserForm(Model model){
         User user = new User();
         model.addAttribute("user",user);
         model.addAttribute("departments",departmentService.getAllDepartments());
-        model.addAttribute("titles",getTitles());
         Stream<Role> roles = roleService.getAllRoles().stream().filter(role -> !role.getRole().name().equals(RoleName.ADMIN.name()));
         model.addAttribute("roles", roles.collect(Collectors.toList()));
 
         return "user/add-user";
-    }
-
-    private String[] getTitles(){
-     return new String []{"Doktor","Mjeke","Moter","Teknik"};
     }
 
     @PostMapping("/admin/addUser")

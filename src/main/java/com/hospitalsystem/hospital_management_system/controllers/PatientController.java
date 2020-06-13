@@ -107,10 +107,6 @@ public class PatientController {
     @GetMapping( "/details/{id}" )
     public String showPatientDetails(@PathVariable( "id" ) long id, Model model) {
         Patient patient = patientRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid patient Id:" + id));
-        System.out.println("visits");
-        for (Visit visit : patient.getVisits()) {
-            System.out.println(visit);
-        }
         model.addAttribute("patient", patient);
         return "patient-details";
     }

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -33,5 +34,20 @@ public class UserService {
 
     public User findByFirstNameAndLastName(String firstName, String lastName) {
         return userRepository.findByFirstNameAndLastName(firstName,lastName);
+    }
+
+    public void deleteUserById(String userId) {
+
+        Optional<User> user = findById(Long.parseLong(userId));
+        if(user.isPresent()){
+            user.get().getVisits().clear();
+            user.get().getAppointments().clear();
+
+        }
+        userRepository.deleteById(Long.parseLong(userId));
+    }
+
+    public Optional<User> findById(long userId) {
+        return userRepository.findById(userId);
     }
 }

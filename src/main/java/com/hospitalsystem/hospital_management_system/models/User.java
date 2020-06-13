@@ -3,6 +3,7 @@ package com.hospitalsystem.hospital_management_system.models;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;
@@ -54,8 +55,6 @@ public class User{
     @Size(min=6, max = 100)
     private String password;
 
-    private String title;
-
     private String active;
 
     private String specialization;
@@ -71,13 +70,10 @@ public class User{
     @EqualsAndHashCode.Exclude
     private Department department;
 
-    @OneToMany(mappedBy = "user")
-    @EqualsAndHashCode.Exclude
-    @ToString.Exclude
+    @OneToMany(mappedBy = "user" ,cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Visit> visits;
 
-    @OneToMany(mappedBy = "user")
-    @EqualsAndHashCode.Exclude
+    @OneToMany(mappedBy = "user" ,cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Appointment> appointments;
 
     public void addRole(Role role){
