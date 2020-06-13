@@ -8,10 +8,7 @@ import com.hospitalsystem.hospital_management_system.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.sql.Date;
@@ -89,6 +86,12 @@ public class AppointmentController {
         appointmentService.addAppointment(appointment);
 
        return "redirect:/appointment/appointments";
+    }
+
+    @PostMapping("/deleteAppointment/{appointmentId}")
+    public String deleteAppointment(@PathVariable("appointmentId") long appointmentId){
+        appointmentService.deleteAppointmentById(appointmentId);
+        return "redirect:/appointment/appointments";
     }
 
 }

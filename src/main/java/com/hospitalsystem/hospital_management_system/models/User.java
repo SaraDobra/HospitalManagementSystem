@@ -71,9 +71,11 @@ public class User{
     private Department department;
 
     @OneToMany(mappedBy = "user" ,cascade = CascadeType.ALL, orphanRemoval = true)
+    @EqualsAndHashCode.Exclude
     private Set<Visit> visits;
 
     @OneToMany(mappedBy = "user" ,cascade = CascadeType.ALL, orphanRemoval = true)
+    @EqualsAndHashCode.Exclude
     private Set<Appointment> appointments;
 
     public void addRole(Role role){

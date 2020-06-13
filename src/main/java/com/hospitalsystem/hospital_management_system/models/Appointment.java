@@ -29,12 +29,10 @@ public class Appointment {
     private String description;
 
     @ManyToOne
-    @EqualsAndHashCode.Exclude
     @ToString.Exclude
     private Patient patient;
 
     @ManyToOne
-    @EqualsAndHashCode.Exclude
     @ToString.Exclude
     private User user;
 

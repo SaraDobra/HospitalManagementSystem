@@ -101,24 +101,10 @@
 <script>
 
     $('#deleteModal').on('show.bs.modal', function (e) {
-        var user = $(e.relatedTarget).data('userd');
-        console.log("user-->" + user);
-        var user_Id_Emri_Mbiemri = user.split(":");
-        console.log(user_Id_Emri_Mbiemri);
-        var userid = user_Id_Emri_Mbiemri[0];
-        var emri = user_Id_Emri_Mbiemri[1];
-        var mbiemri = "";
-        if (user_Id_Emri_Mbiemri.length == 3) {
-            mbiemri = user_Id_Emri_Mbiemri[2];
-        } else {
-            mbiemri = user_Id_Emri_Mbiemri[3];
-        }
-        console.log("useriD",userid)
-        console.log("Emri",emri)
-        console.log("Mbiemri",mbiemri)
-        document.getElementById("paclabel").innerHTML = "Deshironi ta fshini perdoruesin :" + emri + " " + mbiemri + " ?";
+        var appointmentId = $(e.relatedTarget).data('appointmentd');
+        document.getElementById("paclabel").innerHTML = "Deshironi të fshini terminin ?";
 
-        document.getElementById("deleteForm").action = "/users/deleteUser/" + userid;
+        document.getElementById("deleteForm").action = "/appointment/deleteAppointment/" + appointmentId;
 
     });
 </script>
