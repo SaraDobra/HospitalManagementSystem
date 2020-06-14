@@ -1,6 +1,7 @@
 package com.hospitalsystem.hospital_management_system.controllers;
 
 
+import com.hospitalsystem.hospital_management_system.models.Appointment;
 import com.hospitalsystem.hospital_management_system.models.Patient;
 import com.hospitalsystem.hospital_management_system.models.Visit;
 import com.hospitalsystem.hospital_management_system.repository.PatientRepository;
@@ -15,10 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Controller
 @RequestMapping( "/patient" )
@@ -80,7 +78,17 @@ public class PatientController {
             patient.setId(id);
             return "patient-edit";
         }
+        Patient patientOld = patientRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid patient Id:" + id));
+        Set<Appointment>appointmentList = new HashSet<>();
+        Set<Visit>visitList = new HashSet<>();
+        appointmentList.addAll(patientOld.getAppointments());
+        visitList.addAll(patientOld.getVisits());
 
+        patientOld.getVisits().clear();
+        patientOld.getAppointments().clear();
+
+        patient.setVisits(visitList);
+        patient.setAppointments(appointmentList);
         patientService.savePatient(patient);
         return "redirect:/patient/patients";
     }
