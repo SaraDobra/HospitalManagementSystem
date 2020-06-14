@@ -149,5 +149,11 @@ public class PatientController {
         return "patient-details";
     }
 
+    @PostMapping("/details/visits/deleteVisit/{visitId}")
+    public String deleteVisit(@PathVariable("visitId") long visitId){
+        visitService.deleteVisit(visitId);
+        return "redirect:/patient/patients";
+    }
+
 
 }

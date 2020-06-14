@@ -183,8 +183,14 @@
                                                 <p th:text="${visitPac.instructions}"></p>
                                             </div>
                                         </li>
+                                        <li class="list-group-item" id="vizitTools">
+                                            <div>
+                                                <button id="printVizit" class="btn btn-success" style="margin-left: 5%"><i class="fa fa-print"  style="margin-right: 10px"></i>Printo Viziten</button>
+                                                <button id="Edito Viziten" class="btn btn-success" style="margin-left: 5%"><i class="fa fa-edit"  style="margin-right: 10px"></i>Edito Viziten</button>
+                                                <button id="Fshije Viziten" class="btn btn-warning" style="margin-left: 5%" data-target="#deleteModal" data-toggle="modal" th:attr="data-visitd=${visitPac.id}"><i  class="fa fa-trash" style="margin-right: 10px"></i>Fshije Viziten</button>
+                                            </div>
+                                        </li>
                                     </ul>
-                                    <button id="printVizit" class="btn btn-success"><i class="fa fa-print"  style="margin-right: 10px"></i>Printo Viziten</button>
                                 </div>
 
                                 <!--                                Visit Details End-->
@@ -197,12 +203,45 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Fshije Viziten</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p id="paclabel"></p>
+            </div>
+            <div class="modal-footer">
+                <form id="deleteForm" method="post" action="nothing">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Anulo</button>
+                    <button type="submit" class="btn btn-danger">Fshije</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 <th:block th:replace="common/scripts.html" :: end></th:block>
 <script>
     $(function(){
         $('#printVizit').on('click', function() {
             $.print(".print_div");
         });
+    });
+</script>
+<script>
+
+    $('#deleteModal').on('show.bs.modal', function (e) {
+        var visitId = $(e.relatedTarget).data('visitd');
+        console.log(visitId+"-------------")
+        document.getElementById("paclabel").innerHTML = "Deshironi të fshini viziten ?";
+
+        document.getElementById("deleteForm").action = "/patient/details/visits/deleteVisit/" + visitId;
+
     });
 </script>
 </body>

@@ -1,7 +1,6 @@
 package com.hospitalsystem.hospital_management_system.models;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -34,14 +33,10 @@ public class Visit {
     private String instructions;
 
     @ManyToOne
-    @EqualsAndHashCode.Exclude
     @ToString.Exclude
     private Patient patient;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @EqualsAndHashCode.Exclude
+    @ManyToOne
     @ToString.Exclude
     private User user;
-
-
 }

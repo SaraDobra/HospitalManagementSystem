@@ -1,6 +1,7 @@
 package com.hospitalsystem.hospital_management_system.models;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.NaturalId;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -40,10 +41,12 @@ public class Patient {
 
     private String note;
 
-    @OneToMany(mappedBy = "patient",cascade = CascadeType.ALL ,fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "patient",fetch = FetchType.EAGER, orphanRemoval = true)
+    @EqualsAndHashCode.Exclude
     private Set<Visit> visits;
 
-    @OneToMany(mappedBy = "patient" ,cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "patient" , orphanRemoval = true)
+    @EqualsAndHashCode.Exclude
     private Set<Appointment> appointments;
 
     public void addAppointment(Appointment appointment) {
@@ -56,5 +59,10 @@ public class Patient {
 
     public void addVisit(Visit visit) {
         visits.add(visit);
+    }
+
+    public void removeVisit(Visit visit){
+        visit.setPatient(null);
+        visits.remove(visit);
     }
 }

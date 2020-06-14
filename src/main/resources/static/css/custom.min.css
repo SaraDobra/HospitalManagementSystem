@@ -5,7 +5,7 @@
         align-content: center;
     }
 
-    #printVizit , #printVizit > i  {
+    #vizitTools , #vizitTools > i  {
         visibility: hidden;
     }
 }

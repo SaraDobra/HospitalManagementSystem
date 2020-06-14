@@ -70,11 +70,11 @@ public class User{
     @EqualsAndHashCode.Exclude
     private Department department;
 
-    @OneToMany(mappedBy = "user" ,cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "user" , orphanRemoval = true)
     @EqualsAndHashCode.Exclude
     private Set<Visit> visits;
 
-    @OneToMany(mappedBy = "user" ,cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "user" , orphanRemoval = true)
     @EqualsAndHashCode.Exclude
     private Set<Appointment> appointments;
 
@@ -96,5 +96,10 @@ public class User{
 
     public String getRole(){
         return roles.stream().findFirst().get().getRole().name();
+    }
+
+    public void removeVisit(Visit visit){
+        visit.setUser(null);
+        visits.remove(visit);
     }
 }
