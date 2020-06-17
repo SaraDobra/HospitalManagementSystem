@@ -28,4 +28,8 @@ public class VisitService {
 
         optional.ifPresent(visit -> visitRepository.delete(visit));
     }
+
+    public void editVisit(Visit visit) {
+        visitRepository.save(visit);
+    }
 }

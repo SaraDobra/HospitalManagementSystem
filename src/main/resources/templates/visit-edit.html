@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:insert="common/head.html"/>
+
+<body class="nav-md">
+<div class="container body">
+    <div class="main_container">
+        <th:block th:replace="common/left-panel.html"></th:block>
+
+        <th:block th:replace="common/top-navigation.html"></th:block>
+
+        <div class="right_col" role="main">
+            <div class="">
+                <div class="page-title">
+                    <div class="title_left">
+                        <h3>Home/
+                            <small>Pacient Detaje</small>
+                        </h3>
+                    </div>
+
+                    <div class="title_right">
+                        <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="x_panel">
+                            <div class="x_title" th:object="${patient}">
+                                <h2>Profili Pacientit</h2>
+                                <a  th:href="@{/patient/details/{id}(id=${patient.id})}" class="nav navbar-nav navbar-right" style="margin-right: 35px">
+                                    <button type="button" class="btn btn-round btn-info"
+                                            style=" background-color: #1abb9c ;margin-left: 40%"><i
+                                            class="fa fa-history" style="margin-right: 10px"></i>Historia e Visitave
+                                    </button>
+                                </a>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="x_content" >
+
+                                <div class="col-md-3 col-sm-3 col-xs-12 profile_left" style="background-color: white; width: 20%;" >
+                                    <div class="profile_img" style=";margin-left: 5%;">
+                                        <div id="crop-avatar">
+                                            <!-- Current avatar -->
+                                            <img class="img-responsive avatar-view" src="/images/user.png" alt="Avatar"
+                                                 title="Change the avatar">
+                                        </div>
+                                    </div>
+                                    <h3 th:text="${patient.firstName} + ' '+ ${patient.lastName}"></h3>
+
+                                    <ul class=":list-unstyled user_data" style="padding-left: 0px;margin-bottom: 40px">
+                                        <li>
+                                            <b>ID</b>
+                                            <p th:text="${patient.idNr}"></p>
+                                        </li>
+
+                                        <li>
+                                            <b>Emri</b>
+                                            <p th:text="${patient.firstName}"></p>
+                                        </li>
+                                        <li>
+                                            <b>Mbiemri</b>
+                                            <p th:text="${patient.lastName}"></p>
+                                        </li>
+                                        <li>
+                                            <b>Email</b>
+                                            <p th:text="${patient.email}"></p>
+                                        </li>
+                                        <li>
+                                            <b>Data Lindjes</b>
+                                            <p th:text="${patient.birthDate}"></p>
+                                        </li>
+                                        <li>
+                                            <b>Tel</b>
+                                            <p th:text="${patient.phoneNr}"></p>
+                                        </li>
+                                        <li>
+                                            <b>Adresa</b>
+                                            <p th:text="${patient.address}"></p>
+                                        </li>
+                                        <li>
+                                            <b>Qyteti</b>
+                                            <p th:text="${patient.city}"></p>
+                                        </li>
+                                        <li>
+                                            <b>Shteti</b>
+                                            <p th:text="${patient.country}"></p>
+                                        </li>
+                                    </ul>
+
+                                    <a th:href="@{/patient/edit/{id}(id=${patient.id})}" class="btn btn-success"><i
+                                            class="fa fa-edit m-right-xs"></i>Edito Profilin</a>
+                                    <br>
+
+                                </div>
+
+                                <form id="visitForm" class="form-horizontal form-label-left"  th:action="@{/patient/details/visit/editVisit/{visitId} (visitId=${visit.id})}" method="POST" th:object="${visit}" style="width: 50%;float: left;margin-left: 10%;" >
+
+                                    <div class="item form-group" >
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" >Pershkrimi <span class="required">*</span>
+                                        </label>
+                                        <div class="form-group">
+                                            <textarea th:field="*{description}" style="height: auto"  form="visitForm" rows="4" cols="50" class="resizable_textarea form-control"  name="description"  placeholder="Pershkrimi" required="required" >
+
+                                            </textarea>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="item form-group" >
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" >Anemneza <span class="required">*</span>
+                                        </label>
+                                        <div class="form-group">
+                                            <textarea th:field="*{anamneza}"  form="visitForm" rows="4"  class="resizable_textarea form-control"  name="anemneza"  placeholder="Anemneza" required="required" >
+
+                                            </textarea>
+                                        </div>
+                                    </div>
+
+                                    <div class="item form-group" >
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" >Ekzaminimi <span class="required">*</span>
+                                        </label>
+                                        <div class="form-group">
+                                            <textarea th:field="*{examination}"   form="visitForm" rows="4" class="resizable_textarea form-control"  name="ekzamination"  placeholder="Ekzaminimi" required="required" >
+
+                                            </textarea>
+                                        </div>
+                                    </div>
+                                    <div class="item form-group" >
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" >Diagnoza <span class="required">*</span>
+                                        </label>
+                                        <div class="form-group">
+                                            <textarea th:field="*{diagnosis}"  form="visitForm" rows="4" class="resizable_textarea form-control"  name="diagnosis"  placeholder="Diagnoza" required="required" >
+
+                                            </textarea>
+                                        </div>
+                                    </div>
+
+                                    <div class="item form-group" >
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" >Rekomandimi <span class="required">*</span>
+                                        </label>
+                                        <div class="form-group">
+                                            <textarea  th:field="*{recomandation}"  form="visitForm" rows="4" class="resizable_textarea form-control"  name="recomandation"  placeholder="Rekomandimi" required="required" >
+
+                                            </textarea>
+                                        </div>
+                                    </div>
+
+                                    <div class="item form-group" >
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" >Udhezimi <span class="required">*</span>
+                                        </label>
+                                        <div class="form-group">
+                                            <textarea th:field="*{instructions}"  form="visitForm" rows="4"  class="resizable_textarea form-control"  name="instructions"  placeholder="Udhezimi" required="required" >
+
+                                            </textarea>
+                                        </div>
+                                    </div>
+
+                                    <div class="item form-group" >
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" >Medikamentet <span class="required">*</span>
+                                        </label>
+                                        <div class="form-group">
+                                            <textarea th:field="*{medicaments}"   form="visitForm" rows="4" class="resizable_textarea form-control"  name="medicaments"  placeholder="Medikamentet" required="required" >
+
+                                            </textarea>
+                                        </div>
+                                    </div>
+                                    <div class="ln_solid"></div>
+                                    <div class="form-group">
+                                        <div class="col-md-6 col-md-offset-3">
+                                            <button  class="btn btn-primary" type="reset">Cancel</button>
+                                            <button id="send" type="submit" class="btn btn-success">Regjistro Ekzaminim</button>
+                                        </div>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<th:block th:replace="common/scripts.html" :: end></th:block>
+</body>
+
+</html>

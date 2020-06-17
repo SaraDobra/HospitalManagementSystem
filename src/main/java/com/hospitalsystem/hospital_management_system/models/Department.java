@@ -24,5 +24,4 @@ public class Department {
     @ToString.Exclude
     private Set<User> users;
 
-
 }

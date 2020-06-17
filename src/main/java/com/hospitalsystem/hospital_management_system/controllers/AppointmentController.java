@@ -42,7 +42,7 @@ public class AppointmentController {
         for(Role r : loggedUser.getRoles()){
             userRole = r;
         }
-        if((userRole.getRole().toString().equals(RoleName.ADMIN.toString())) || (userRole.getRole().toString().equals(RoleName.RECEPTIONIST.toString()))){
+        if((userRole.getRole().toString().equals(RoleName.ROLE_ADMIN.toString())) || (userRole.getRole().toString().equals(RoleName.ROLE_RECEPTIONIST.toString()))){
             appointments = appointmentService.getAllAppointments();
             model.addAttribute("appointments",appointments);
             return "/appointment/appointments";

@@ -73,7 +73,7 @@ public class PatientController {
     }
 
     @PostMapping( "/edit/{id}" )
-    public String editUser(@PathVariable( "id" ) long id, @Valid Patient patient, BindingResult result, Model model) {
+    public String editPatient(@PathVariable( "id" ) long id, @Valid Patient patient, BindingResult result, Model model) {
         if (result.hasErrors()) {
             patient.setId(id);
             return "patient-edit";
@@ -163,5 +163,32 @@ public class PatientController {
         return "redirect:/patient/patients";
     }
 
+    @GetMapping("/details/{patientId}/visit/editVisit/{visitId}")
+    public String showEditVisit(@PathVariable("patientId") long patientId,@PathVariable("visitId") long visitId,Model model){
+        Patient patient = patientRepository.findById(patientId).orElseThrow(() -> new IllegalArgumentException("Invalid patient Id:" + patientId));
+        model.addAttribute("patient",patient);
+        Optional  optionalVisit= visitService.getVisitById(visitId);
+        if(optionalVisit.isPresent()){
+            model.addAttribute("visit",optionalVisit.get());
+        }
+        return "visit-edit";
+    }
+
+
+    @PostMapping("/details/visit/editVisit/{visitId}")
+    public String editVisit(@Valid Visit visit,@PathVariable("visitId") long visitId,Model model){
+        Optional<Visit>  optionalVisit= visitService.getVisitById(visitId);
+        visit.setId(visitId);
+        if(optionalVisit.isPresent()){
+            model.addAttribute("patient",optionalVisit.get().getPatient());
+            visit.setPatient(optionalVisit.get().getPatient());
+            visit.setUser(optionalVisit.get().getUser());
+        }
+        Date date = new Date();
+        visit.setDate(date);
+        System.out.println("EditVisit inside");
+        visitService.editVisit(visit);
+        return "redirect:/patient/details/"+visit.getPatient().getId();
+    }
 
 }

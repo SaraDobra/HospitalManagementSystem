@@ -69,7 +69,7 @@ public class UserController {
         User user = new User();
         model.addAttribute("user",user);
         model.addAttribute("departments",departmentService.getAllDepartments());
-        Stream<Role> roles = roleService.getAllRoles().stream().filter(role -> !role.getRole().name().equals(RoleName.ADMIN.name()));
+        Stream<Role> roles = roleService.getAllRoles().stream().filter(role -> !role.getRole().name().equals(RoleName.ROLE_ADMIN.name()));
         model.addAttribute("roles", roles.collect(Collectors.toList()));
 
         return "user/add-user";
@@ -100,7 +100,7 @@ public class UserController {
 
         for(User user : allUsers){
             String userNameLastName = user.getFirstName()+" "+user.getLastName();
-            if (userNameLastName.contains(term) && user.getRole().equals(RoleName.DOCTOR.name())) {
+            if (userNameLastName.contains(term) && user.getRole().equals(RoleName.ROLE_DOCTOR.name())) {
                 suggestions.add(user.getFirstName()+" "+user.getLastName());
             }
         }
