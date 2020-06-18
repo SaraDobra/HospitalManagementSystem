@@ -34,4 +34,12 @@ public class AppointmentService {
         System.out.println(appointment.get().toString()+" --------------<<<<<<<<<<<<<<");
         appointment.ifPresent(value -> appointmentRepository.delete(value));
     }
+
+    public Optional<Appointment> getAppointmentById(long id) {
+        return appointmentRepository.findById(id);
+    }
+
+    public void updateAppointment(Appointment appointment) {
+        appointmentRepository.save(appointment);
+    }
 }
