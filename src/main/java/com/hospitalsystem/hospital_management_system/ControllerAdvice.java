@@ -13,6 +13,9 @@ public class ControllerAdvice {
     HelperService helperService;
 
     public String getLoggedUserNanme(){
+        if(helperService.getLoggedUser() != null){
+            System.out.println("Role="+helperService.getLoggedUser().getRole());
+        }
         System.out.println("--------------- "+helperService.getLoggedUserName());
        return helperService.getLoggedUserName();
     }
@@ -20,6 +23,9 @@ public class ControllerAdvice {
     @ModelAttribute
     public void handleRequest(HttpServletRequest request, Model model) {
         model.addAttribute("userName", getLoggedUserNanme());
+        if(helperService.getLoggedUser() != null){
+            model.addAttribute("user_role",helperService.getLoggedUser().getRole());
+        }
     }
 
 }

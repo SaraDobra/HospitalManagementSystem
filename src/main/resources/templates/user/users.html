@@ -66,7 +66,7 @@
                                         <td th:text="${user.roles[0].role}">Admin</td>
 
 
-                                        <td><a th:href="@{/user/edit/{id}(id=${user.id})}"><i class="fa fa-edit" style="font-size:20px;color:cornflowerblue; margin-right: 10px;"></i></a><a
+                                        <td><a th:href="@{/admin/editUser/{userId}(userId=${user.id})}"><i class="fa fa-edit" style="font-size:20px;color:cornflowerblue; margin-right: 10px;"></i></a><a
                                                 href="#"><i data-toggle="modal" data-target="#deleteModal"
                                                             th:attr="data-userd=${user.id} +':'+ ${user.firstName} +':'+ ${user.lastName}"
                                                             class="fa fa-trash-o" style="font-size:20px;color:red"></i></a>

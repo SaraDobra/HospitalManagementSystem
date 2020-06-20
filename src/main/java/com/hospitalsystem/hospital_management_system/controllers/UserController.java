@@ -49,11 +49,12 @@ public class UserController {
 
     @GetMapping("/admin/users")
     public String showUsers(Model model){
-        List<User> userList = userService.getAllUsers();
+        List<User> userList = userService.findAll();
         for(User user :userList){
             System.out.println(user.getRoles());
         }
-        model.addAttribute("users",userList);
+        Stream<User> users = userService.findAll().stream().filter(user -> !user.getRole().equals(RoleName.ROLE_ADMIN.name()));
+        model.addAttribute("users",users.collect(Collectors.toList()));
         return "/user/users";
 
     }
@@ -63,6 +64,38 @@ public class UserController {
         userService.deleteUserById(userId);
         return "redirect:/admin/users";
     }
+
+    @GetMapping("/admin/editUser/{userId}")
+    public String showEditUser(@PathVariable("userId") long userId, Model model){
+       Optional<User>optionalUser = userService.findById(userId);
+       if(optionalUser.isPresent()){
+           model.addAttribute("user",optionalUser.get());
+           model.addAttribute("departments",departmentService.getAllDepartments());
+           Stream<Role> roles = roleService.getAllRoles().stream().filter(role -> !role.getRole().name().equals(RoleName.ROLE_ADMIN.name()));
+           model.addAttribute("roles", roles.collect(Collectors.toList()));
+           model.addAttribute("userDepartment",optionalUser.get().getDepartment().getDepartmentName());
+           model.addAttribute("userRole",optionalUser.get().getRole());
+
+       }
+       return "user/edit-user";
+    }
+
+    @PostMapping("/admin/EditUser")
+    public String editUser(@ModelAttribute("user") User user,@Valid String roleId){
+        Optional<User> optionalUser= userService.findById(user.getId());
+        if(optionalUser.isPresent()){
+            user.setVisits(optionalUser.get().getVisits());
+            user.setAppointments(optionalUser.get().getAppointments());
+            user.setPassword(optionalUser.get().getPassword());
+        }
+        Optional<Role> role = roleService.getRoleById(roleId);
+        role.ifPresent(user::addRole);
+        System.out.println(user.toString());
+        userService.updateUser(user);
+        return "redirect:/admin/users";
+    }
+
+
 
     @GetMapping("/admin/addUser")
     public String showaddUserForm(Model model){
@@ -76,7 +109,7 @@ public class UserController {
     }
 
     @PostMapping("/admin/addUser")
-    public String addUser(@ModelAttribute("patient") User user,@Valid  String departmentId,@Valid String roleId){
+    public String addUser(@ModelAttribute("user") User user,@Valid  String departmentId,@Valid String roleId){
        Optional<Department> department = departmentService.findById(departmentId);
         department.ifPresent(user::setDepartment);
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));

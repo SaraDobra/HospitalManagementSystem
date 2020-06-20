@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:insert="common/head.html"/>
+
+<body class="nav-md">
+<div class="container body">
+    <div class="main_container">
+        <th:block th:replace="common/left-panel.html"></th:block>
+
+        <th:block th:replace="common/top-navigation.html"></th:block>
+
+        <div class="right_col" role="main">
+            <div class="">
+                <div class="page-title">
+                    <div class="title_left">
+                        <h3>Home/<small>Edito Përdoruesin</small>
+                        </h3>
+                    </div>
+
+                    <div class="title_right">
+                        <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="x_panel">
+                            <div class="x_title">
+                                <h2>Edito Përdoruesin</h2>
+
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="x_content">
+
+
+                                <form  class="form-horizontal form-label-left" method="POST"  th:action="@{/admin/EditUser}" th:object="${user}" novalidate style="margin-top: 10px">
+
+                                    <div class="item form-group" style="display: none">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="firstName">Id <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <input   type="text" th:field="*{id}" id="id" name="firstName" required="required" class="form-control col-md-7 col-xs-12">
+                                        </div>
+                                    </div>
+                                    <div class="item form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="firstName">Emri <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <input   type="text" th:field="*{firstName}" id="firstName" name="firstName" required="required" class="form-control col-md-7 col-xs-12">
+                                        </div>
+                                    </div>
+
+                                    <div class="item form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="lastName">Mbiemri <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <input  type="text" th:field="*{lastName}" id="lastName" name="lastName" required="required" class="form-control col-md-7 col-xs-12">
+                                        </div>
+                                    </div>
+
+                                    <div class="item form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">Email <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <input  type="email" id="email" th:field="*{email}" name="email" required="required" class="form-control col-md-7 col-xs-12">
+                                        </div>
+                                    </div>
+
+
+                                    <div class="item form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="phoneNr">Tel <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <input  type="text" th:field="*{phoneNr}" id="phoneNr" name="phoneNr" required="required" class="form-control col-md-7 col-xs-12">
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="item form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="username">Username <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <input  type="text" th:field="*{username}" id="username" name="username" required="required" class="form-control col-md-7 col-xs-12">
+                                        </div>
+                                    </div>
+
+                                    <div class="item form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="specialization">Specializimi <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <input  type="text" th:field="*{specialization}" id="specialization" name="specialization" required="required" class="form-control col-md-7 col-xs-12">
+                                        </div>
+                                    </div>
+
+                                    <div class="item form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" >Departamenti <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <select  name="departmentId" id="departmentId" th:field="*{department}":>
+                                                <option
+                                                        th:each="dep: ${departments}"
+                                                        th:value="${dep.id}"
+                                                        th:text="${dep.departmentName}" ></option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="item form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" >Roli <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <select name="roleId" id="roleId">
+                                                <option
+                                                        th:each="role: ${roles}"
+                                                        th:value="${role.id}"
+                                                        th:text="${role.role}"
+                                                        ></option>
+
+                                            </select>
+                                            <p id = "userRole" th:text="${userRole}" style="display: none"></p>
+                                        </div>
+                                    </div>
+                                    <div class="item form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" >Statusi <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <select name="status" id="status" th:field="*{active}">
+                                                <option th:value="1" th:text="AKTIV"></option>
+                                                <option th:value="0" th:text="JO-AKTIV"></option>
+
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="ln_solid"></div>
+                                    <div class="form-group">
+                                        <div class="col-md-6 col-md-offset-3">
+                                            <button  class="btn btn-primary" type="reset">Anulo</button>
+                                            <button id="send" type="submit" class="btn btn-success">Edito</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<th:block th:replace="common/scripts.html" :: end></th:block>
+<script>
+    var role = $("#userRole").text()
+    $("#roleText").text(role)
+    if(role === 'ROLE_DOCTOR'){
+        $("#roleId").prop('selectedIndex', 0)
+    }else{
+        $("#roleId").prop('selectedIndex', 1)
+    }
+
+</script>
+</body>
+
+</html>

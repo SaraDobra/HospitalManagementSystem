@@ -20,10 +20,6 @@ public class UserService {
        return userRepository.findByEmail(email);
     }
 
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
-    }
-
     public void addPatient(User user) {
         userRepository.save(user);
     }
@@ -49,5 +45,13 @@ public class UserService {
 
     public Optional<User> findById(long userId) {
         return userRepository.findById(userId);
+    }
+
+    public void updateUser(User user) {
+        userRepository.save(user);
+    }
+
+    public List<User> findAll() {
+        return userRepository.findAll();
     }
 }

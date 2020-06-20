@@ -46,10 +46,9 @@
                         <ul class="nav child_menu">
                             <li><a href="/appointment/appointments">Lista e Termineve</a></li>
                             <li><a href="/appointment/addAppointment">Shto Termin</a></li>
-
                         </ul>
                     </li>
-                    <li ><a href="/admin/users"><i class="fa fa-user-md"></i>Përdoruesit<span class="fa fa-chevron-down"></span></a>
+                    <li th:if="${user_role == 'ROLE_ADMIN'}" ><a href="/admin/users"><i class="fa fa-user-md"></i>Përdoruesit<span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
                             <li><a href="/admin/users">Lista e Përdoruesve</a></li>
                             <li><a href="/admin/addUser">Shto Përdorues</a></li>
