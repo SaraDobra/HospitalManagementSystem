@@ -7,8 +7,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
-import java.util.Date;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Data
 @Entity
@@ -44,6 +44,13 @@ public class Patient {
     @OneToMany(mappedBy = "patient",fetch = FetchType.EAGER, orphanRemoval = true)
     @EqualsAndHashCode.Exclude
     private Set<Visit> visits;
+
+
+    public List<Visit> getVisits(){
+        List<Visit> visits = new ArrayList<>(this.visits);
+        visits.sort(Comparator.comparing(Visit::getDate).reversed());
+       return visits;
+    }
 
     @OneToMany(mappedBy = "patient" , orphanRemoval = true)
     @EqualsAndHashCode.Exclude

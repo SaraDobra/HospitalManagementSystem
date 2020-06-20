@@ -22,11 +22,11 @@ public class AppointmentService {
     }
 
     public List<Appointment> getAllAppointments() {
-        return appointmentRepository.findAll();
+        return appointmentRepository.findAllByOrderByDateDesc();
     }
 
     public List<Appointment> getAppointmentsByUser(User loggedUser) {
-        return appointmentRepository.findByUser(loggedUser);
+        return appointmentRepository.findByUserOrderByDateDesc(loggedUser);
     }
 
     public void deleteAppointmentById(long appointmentId) {
