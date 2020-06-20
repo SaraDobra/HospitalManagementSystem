@@ -39,4 +39,8 @@ public class PatientService {
     public Patient findByNameAndLastName(String firstName, String lastName) {
        return patientRepository.findByFirstNameAndLastName(firstName,lastName);
     }
+
+    public long patientCount() {
+        return patientRepository.count();
+    }
 }

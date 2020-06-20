@@ -42,4 +42,8 @@ public class AppointmentService {
     public void updateAppointment(Appointment appointment) {
         appointmentRepository.save(appointment);
     }
+
+    public long appointmentsCount() {
+        return appointmentRepository.count();
+    }
 }

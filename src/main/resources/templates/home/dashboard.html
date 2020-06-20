@@ -16,22 +16,22 @@
             <!-- top tiles -->
             <div class="row tile_count" style="text-align: center">
                 <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-                    <span class="count_top"><i class="fa fa-user"></i> Pacient te Regjistruar</span>
-                    <div class="count">2500</div>
+                    <span class="count_top"><i class="fa fa-user"></i> Pacienta te Regjistruar</span>
+                    <div th:text="${patientsCount}" class="count green"></div>
 
                 </div>
                 <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-                    <span class="count_top"><i class="fa fa-clock-o"></i>Termine</span>
-                    <div class="count">14</div>
+                    <span class="count_top"><i class="fa fa-clock-o"></i>Termine Gjithsej</span>
+                    <div th:text="${appointmentsCount}" class="count green"></div>
 
                 </div>
                 <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-                    <span class="count_top"><i class="fa fa-user"></i>Vizita te perfunduara</span>
-                    <div class="count green">148</div>
+                    <span class="count_top"><i class="fa fa-hospital-o"></i>Vizita Gjithsej</span>
+                    <div  th:text="${visitsCount} "class="count green"></div>
                 </div>
                 <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-                    <span class="count_top"><i class="fa fa-user"></i>Gjithsej Staff</span>
-                    <div class="count">56</div>
+                    <span class="count_top"><i class="fa fa-users" ></i>Përdorues Gjithsej</span>
+                    <div  th:text="${usersCount}" class="count green"></div>
                 </div>
 
             </div>
@@ -43,13 +43,8 @@
 
                         <div class="row x_title">
                             <div class="col-md-6">
-                                <h3>Network Activities <small>Graph title sub-title</small></h3>
+                                <h3>Statistika</h3>
                             </div>
-                            <div class="col-md-6">
-                                <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
-                                    <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
-                                    <span>December 30, 2014 - January 28, 2015</span> <b class="caret"></b>
-                                </div>
                             </div>
                         </div>
 
@@ -64,7 +59,7 @@
 
                             <div class="col-md-12 col-sm-12 col-xs-6">
                                 <div>
-                                    <p>Facebook Campaign</p>
+                                    <p>Pacient te regjistruar</p>
                                     <div class="">
                                         <div class="progress progress_sm" style="width: 76%;">
                                             <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="80"></div>
@@ -72,7 +67,7 @@
                                     </div>
                                 </div>
                                 <div>
-                                    <p>Twitter Campaign</p>
+                                    <p>Termine</p>
                                     <div class="">
                                         <div class="progress progress_sm" style="width: 76%;">
                                             <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="60"></div>
@@ -82,7 +77,7 @@
                             </div>
                             <div class="col-md-12 col-sm-12 col-xs-6">
                                 <div>
-                                    <p>Conventional Media</p>
+                                    <p>Vizita</p>
                                     <div class="">
                                         <div class="progress progress_sm" style="width: 76%;">
                                             <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="40"></div>
@@ -90,7 +85,7 @@
                                     </div>
                                 </div>
                                 <div>
-                                    <p>Bill boards</p>
+                                    <p>Përdorues</p>
                                     <div class="">
                                         <div class="progress progress_sm" style="width: 76%;">
                                             <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="50"></div>

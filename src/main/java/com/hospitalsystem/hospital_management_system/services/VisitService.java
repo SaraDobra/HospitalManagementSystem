@@ -32,4 +32,8 @@ public class VisitService {
     public void editVisit(Visit visit) {
         visitRepository.save(visit);
     }
+
+    public long visitsCount() {
+       return visitRepository.count();
+    }
 }

@@ -54,4 +54,8 @@ public class UserService {
     public List<User> findAll() {
         return userRepository.findAll();
     }
+
+    public long usersCount() {
+        return userRepository.count();
+    }
 }
