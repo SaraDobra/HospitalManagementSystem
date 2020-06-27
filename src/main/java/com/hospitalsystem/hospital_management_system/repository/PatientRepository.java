@@ -12,6 +12,8 @@ public interface PatientRepository extends JpaRepository<Patient, Long> {
 
     void deleteByIdNr(String idNr);
 
+    boolean existsByIdNr(String idNr);
+
     @Query("SELECT p from Patient p where p.firstName LIKE %:term% or p.lastName LIKE %:term%")
     List<Patient> fetchPatients(String term);
 

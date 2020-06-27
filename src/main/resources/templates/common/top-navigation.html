@@ -1,5 +1,9 @@
 <div class="top_nav" xmlns:th="http://www.w3.org/1999/xhtml">
     <div class="nav_menu">
+
+        <div th:if="${message != null}" id="toaster-alert" class="alert alert-danger" role="alert" >
+                <p th:text=" ${message.message}" ></p>
+        </div>
         <nav>
             <div class="nav toggle">
                 <a id="menu_toggle"><i class="fa fa-bars"></i></a>

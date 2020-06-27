@@ -100,29 +100,31 @@
 
                                 <form id="visitForm" class="form-horizontal form-label-left"  th:action="@{/patient/details/addVisit/{patientId} (patientId=${patient.id})}" method="POST" th:object="${visit}" style="width: 50%;float: left;margin-left: 10%;" >
 
-                                    <div class="item form-group" >
-                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" >Pershkrimi <span class="required">*</span>
-                                        </label>
-                                        <div class="form-group">
+                                    <div class="row">
+                                        <div class="item form-group col-xs-6" >
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12 d-flex" >Pershkrimi <span class="required">*</span>
+                                            </label>
+                                            <div class="form-group">
                                             <textarea th:field="*{description}" style="height: auto"  form="visitForm" rows="4" cols="50" class="resizable_textarea form-control"  name="description"  placeholder="Pershkrimi" required="required" >
 
                                             </textarea>
+                                            </div>
+
                                         </div>
 
-                                    </div>
-
-                                    <div class="item form-group" >
-                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" >Anemneza <span class="required">*</span>
-                                        </label>
-                                        <div class="form-group">
+                                        <div class="item form-group col-xs-6" >
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12 d-flex" >Anemneza <span class="required">*</span>
+                                            </label>
+                                            <div class="form-group">
                                             <textarea th:field="*{anamneza}"  form="visitForm" rows="4"  class="resizable_textarea form-control"  name="anemneza"  placeholder="Anemneza" required="required" >
 
                                             </textarea>
+                                            </div>
                                         </div>
                                     </div>
-
-                                    <div class="item form-group" >
-                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" >Ekzaminimi <span class="required">*</span>
+                                <div class="row">
+                                    <div class="item form-group col-xs-6" >
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12 d-flex" >Ekzaminimi <span class="required">*</span>
                                         </label>
                                         <div class="form-group">
                                             <textarea th:field="*{examination}"   form="visitForm" rows="4" class="resizable_textarea form-control"  name="ekzamination"  placeholder="Ekzaminimi" required="required" >
@@ -130,8 +132,8 @@
                                             </textarea>
                                         </div>
                                     </div>
-                                    <div class="item form-group" >
-                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" >Diagnoza <span class="required">*</span>
+                                    <div class="item form-group col-xs-6" >
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12 d-flex" >Diagnoza <span class="required">*</span>
                                         </label>
                                         <div class="form-group">
                                             <textarea th:field="*{diagnosis}"  form="visitForm" rows="4" class="resizable_textarea form-control"  name="diagnosis"  placeholder="Diagnoza" required="required" >
@@ -139,9 +141,10 @@
                                             </textarea>
                                         </div>
                                     </div>
-
-                                    <div class="item form-group" >
-                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" >Rekomandimi <span class="required">*</span>
+                                </div>
+                                <div class="row">
+                                    <div class="item form-group col-xs-6" >
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12 d-flex" >Rekomandimi <span class="required">*</span>
                                         </label>
                                         <div class="form-group">
                                             <textarea  th:field="*{recomandation}"  form="visitForm" rows="4" class="resizable_textarea form-control"  name="recomandation"  placeholder="Rekomandimi" required="required" >
@@ -150,8 +153,8 @@
                                         </div>
                                     </div>
 
-                                    <div class="item form-group" >
-                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" >Udhezimi <span class="required">*</span>
+                                    <div class="item form-group col-xs-6" >
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12 d-flex" >Udhezimi <span class="required">*</span>
                                         </label>
                                         <div class="form-group">
                                             <textarea th:field="*{instructions}"  form="visitForm" rows="4"  class="resizable_textarea form-control"  name="instructions"  placeholder="Udhezimi" required="required" >
@@ -160,8 +163,11 @@
                                         </div>
                                     </div>
 
+                                </div>
+
+
                                     <div class="item form-group" >
-                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" >Medikamentet <span class="required">*</span>
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12 d-flex" >Medikamentet <span class="required">*</span>
                                         </label>
                                         <div class="form-group">
                                             <textarea th:field="*{medicaments}"   form="visitForm" rows="4" class="resizable_textarea form-control"  name="medicaments"  placeholder="Medikamentet" required="required" >

@@ -2,6 +2,7 @@ package com.hospitalsystem.hospital_management_system.controllers;
 
 
 import com.hospitalsystem.hospital_management_system.models.Appointment;
+import com.hospitalsystem.hospital_management_system.models.Message;
 import com.hospitalsystem.hospital_management_system.models.Patient;
 import com.hospitalsystem.hospital_management_system.models.Visit;
 import com.hospitalsystem.hospital_management_system.repository.PatientRepository;
@@ -13,6 +14,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.text.SimpleDateFormat;
@@ -53,8 +56,12 @@ public class PatientController {
     }
 
     @PostMapping( "/addPatient" )
-    public String addPatient(@ModelAttribute( "patient" ) Patient patient) {
-        System.out.println("ADD PATIENT >>>>>>>>>>" + patient.toString());
+    public String addPatient(@ModelAttribute( "patient" ) Patient patient, Model model) {
+        if(patientExists(patient.getIdNr())){
+            model.addAttribute("patient",new Patient());
+            model.addAttribute("message",new Message("Pacienti Ekziston","warning"));
+            return "add-patient";
+        }
         patientService.addPatient(patient);
         return "redirect:/patient/patients";
     }
@@ -189,6 +196,10 @@ public class PatientController {
         System.out.println("EditVisit inside");
         visitService.editVisit(visit);
         return "redirect:/patient/details/"+visit.getPatient().getId();
+    }
+
+    private boolean patientExists(String idNr){
+        return patientService.patientExists(idNr);
     }
 
 }

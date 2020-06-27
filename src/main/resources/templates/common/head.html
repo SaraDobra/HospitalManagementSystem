@@ -19,12 +19,13 @@
     <link href="/iCheck/skins/flat/green.css" rel="stylesheet">
 
     <!-- Datatables -->
-    <link href="/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
-    <link href="/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
-    <link href="/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
-    <link href="/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
-    <link href="/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
+    <link href="/static/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+    <link href="/static/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
+    <link href="/static/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
+    <link href="/static/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
+    <link href="/static/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script defer src="/js/Form.js"></script>
     <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
@@ -43,6 +44,55 @@
 
 
     <style>
+        @keyframes autoHide {
+            to {
+                width: 0;
+                height: 0;
+                overflow: hidden;
+                padding: 0;
+                display: none !important;
+            }
+        }
+        #toaster-alert{
+            animation: autoHide 0s ease-in 6s forwards;
+            position: absolute;
+            width: 100%;
+            margin-left: 50px;
+        }
+        #toaster-alert p{
+            font-size: medium;
+        }
+
+        .warning{
+            background-color: red !important;
+        }
+
+        .success{
+            background-color: green !important;
+        }
+
+        .toaster .toaster-title{
+            border-bottom: 1px solid black;
+            padding: 5px 10px;
+            font-size: 18px;
+
+            font-weight: 900;
+        }
+        .toaster .toaster-title p{
+          font-size: 15px;
+        }
+        #visitForm{
+            width: 80% !important;
+            padding: 10px;
+            margin: 0px !important;
+        }
+        #visitForm textarea{
+            resize: none !important;
+        }
+        .d-flex{
+            display: flex !important;
+        }
+
         .tooltip {
             position: relative;
             display: inline-block;

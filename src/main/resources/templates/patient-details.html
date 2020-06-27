@@ -42,7 +42,7 @@
                                 </a>
                                 <div class="clearfix"></div>
                             </div>
-                            <div class="x_content" >
+                            <div class="x_content" style="padding-left: 0px">
 
                                 <div class="col-md-3 col-sm-3 col-xs-12 profile_left" style="background-color: white; width: 20%;" >
                                     <div class="profile_img" style=";margin-left: 5%;">
@@ -100,33 +100,54 @@
 
                                 </div>
 
-
-                                <table id="datatable-buttons" class="table table-striped table-bordered"
-                                       style="clear: both; display: inline;height: auto; background-color: white ;margin-left: 3%;padding-top: 25px" >
-                                    <thead>
-                                    <tr>
-                                        <th>Data</th>
-                                        <th>Mjeku</th>
-                                        <th>Detaje</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
+                                    <table border="1" class="pac-table" style="display: inline-block; margin: 20px">
+                                        <thead>
+                                        <tr>
+                                            <th>Data</th>
+                                            <th>Mjeku</th>
+                                            <th>Detaje</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
 
 
-                                    <tr th:each="visit : ${patient.visits}">
-                                        <td th:text="${#dates.format(visit.date, 'dd-MM-yyyy')}">13-03-2020</td>
-                                        <td th:text="${visit.user.fullName()}">Sara Dobra</td>
-                                        <td>
-                                            <a th:href="@{/patient/details/{patientId}/visit/{visitId}(patientId=${patient.id},visitId=${visit.id})}"><i
-                                                    class="fa fa-eye" style="font-size:20px; margin-left: 10px"></i></a>
-                                        </td>
+                                        <tr th:each="visit : ${patient.visits}">
+                                            <td th:text="${#dates.format(visit.date, 'dd-MM-yyyy')}">13-03-2020</td>
+                                            <td th:text="${visit.user.fullName()}">Sara Dobra</td>
+                                            <td>
+                                                <a th:href="@{/patient/details/{patientId}/visit/{visitId}(patientId=${patient.id},visitId=${visit.id})}"><i
+                                                        class="fa fa-eye" style="font-size:20px; margin-left: 10px"></i></a>
+                                            </td>
 
-                                    </tr>
-                                    </tbody>
-                                </table>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+<!--                                <table id="datatable-buttons" class="table table-striped table-bordered"-->
+<!--                                       style="clear: both; display: inline;height: auto; background-color: white ;margin-left: 3%;padding-top: 25px" >-->
+<!--                                    <thead>-->
+<!--                                    <tr>-->
+<!--                                        <th>Data</th>-->
+<!--                                        <th>Mjeku</th>-->
+<!--                                        <th>Detaje</th>-->
+<!--                                    </tr>-->
+<!--                                    </thead>-->
+<!--                                    <tbody>-->
+
+
+<!--                                    <tr th:each="visit : ${patient.visits}">-->
+<!--                                        <td th:text="${#dates.format(visit.date, 'dd-MM-yyyy')}">13-03-2020</td>-->
+<!--                                        <td th:text="${visit.user.fullName()}">Sara Dobra</td>-->
+<!--                                        <td>-->
+<!--                                            <a th:href="@{/patient/details/{patientId}/visit/{visitId}(patientId=${patient.id},visitId=${visit.id})}"><i-->
+<!--                                                    class="fa fa-eye" style="font-size:20px; margin-left: 10px"></i></a>-->
+<!--                                        </td>-->
+
+<!--                                    </tr>-->
+<!--                                    </tbody>-->
+<!--                                </table>-->
 
                                 <!--                                Visit Details Start-->
-                                <div  id="printV" class="print_div"  style="width: 50% ;height: auto; float: right; margin-right: 20px" >
+                                <div  id="printV" class="print_div">
                                     <ul th:if="${visitPac != null}" th:object="${visitPac}" class="list-group"
                                         >
                                         <li class="list-group-item ">Historia E Vizites

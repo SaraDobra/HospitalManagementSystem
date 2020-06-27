@@ -43,4 +43,8 @@ public class PatientService {
     public long patientCount() {
         return patientRepository.count();
     }
+
+    public boolean patientExists(String idNr) {
+        return patientRepository.existsByIdNr(idNr);
+    }
 }

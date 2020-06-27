@@ -1,12 +1,30 @@
 
+#printV{
+    height: auto;
+    float: right;
+    margin-right: 20px;
+    width: 50%;
+}
+
 @media print {
     #printV {
         text-align : center;
+        background: black; !important;
         align-content: center;
+        float: none; !important;
+        margin: 0 auto; !important
     }
 
     #vizitTools , #vizitTools > i  {
         visibility: hidden;
+    }
+
+    .profile_left{
+        display: none !important;
+    }
+    
+    .pac-table{
+        display: none!important;
     }
 }
 
@@ -584,7 +602,7 @@ body {
     font-family: "Helvetica Neue", Roboto, Arial, "Droid Sans", sans-serif;
     font-size: 13px;
     font-weight: 400;
-    line-height: 1.471
+    line-height: 1.471;
 }
 
 .main_container .top_nav {
@@ -1007,6 +1025,7 @@ footer {
 
 .degrees:after, .x_content, .x_panel {
     position: relative
+
 }
 
 @media (min-width: 768px) {
@@ -1048,7 +1067,7 @@ article.media {
 }
 
 *, :after, :before {
-    box-sizing: border-box
+    box-sizing: border-box;
 }
 
 #integration-list {
@@ -1154,7 +1173,7 @@ h2 {
 
 .x_panel {
     width: 100%;
-    padding: 10px 17px;
+    /*padding: 10px 17px;*/
     display: inline-block;
     background: #fff;
     border: 1px solid #E6E9ED;
@@ -4563,10 +4582,12 @@ ul.verticle_bars li {
     border-color: rgba(243, 156, 18, .88)
 }
 
+
+
 .alert-danger, .alert-error {
-    color: #E9EDEF;
-    background-color: rgba(231, 76, 60, .88);
-    border-color: rgba(231, 76, 60, .88)
+color: black;
+background-color: rgba(231, 76, 60, .88);
+border-color: rgba(231, 76, 60, .88);
 }
 
 .ui-pnotify.dark .ui-pnotify-container {
@@ -4682,4 +4703,8 @@ ul.notifications {
 
 .dataTables_wrapper > .row {
     overflow: auto !important
+}
+
+.pac-table td{
+    padding: 10px;
 }

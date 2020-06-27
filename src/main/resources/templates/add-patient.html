@@ -37,7 +37,7 @@
                             <div class="x_content">
 
 
-                                <form  class="form-horizontal form-label-left" method="POST"  th:action="@{/patient/addPatient}" th:object="${patient}" novalidate >
+                                <form id="form" class="form-horizontal form-label-left" method="POST"  th:action="@{/patient/addPatient}" th:object="${patient}" novalidate >
 
                                     <div class="item form-group">
                                         <label class="control-label col-md-3 col-sm-3 col-xs-12" >ID <span class="required">*</span>
@@ -127,7 +127,7 @@
                                     <div class="form-group">
                                         <div class="col-md-6 col-md-offset-3">
                                             <button  class="btn btn-primary" type="reset">Cancel</button>
-                                            <button id="send" type="submit" class="btn btn-success">Regjistro</button>
+                                            <button id="submit" type="submit" class="btn btn-success" >Regjistro</button>
                                         </div>
                                     </div>
                                 </form>
@@ -140,6 +140,7 @@
     </div>
 </div>
 <th:block th:replace="common/scripts.html" :: end></th:block>
+<script defer src="/js/addPacient.js"></script>
 </body>
 
 </html>
