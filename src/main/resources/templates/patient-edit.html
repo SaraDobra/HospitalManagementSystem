@@ -37,7 +37,7 @@
                             <div class="x_content">
 
 
-                                <form  class="form-horizontal form-label-left" method="POST"  th:action="@{/patient/edit/{id}(id=${patient.id})}" th:object="${patient}" novalidate >
+                                <form id="form" class="form-horizontal form-label-left" method="POST"  th:action="@{/patient/edit/{id}(id=${patient.id})}" th:object="${patient}" novalidate >
 
                                     <div class="item form-group">
                                         <label class="control-label col-md-3 col-sm-3 col-xs-12" >ID <span class="required">*</span>
@@ -139,6 +139,7 @@
         </div>
     </div>
 </div>
+<script defer src="/js/patientForm.js"></script>
 <th:block th:replace="common/scripts.html" :: end></th:block>
 </body>
 

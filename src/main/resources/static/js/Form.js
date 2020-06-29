@@ -30,6 +30,11 @@ function Form() {
         return (day > 1 && day < 32 && month > 1 && month < 12 && year > 1000 && year <= currentYear) ? this.validInput(date) : this.invalidInput(date);
     };
 
+    this.validateDateTime = function(dt){
+      return Date.parse(dt.value) ? this.validInput(dt) : this.invalidInput(dt)
+    };
+
+
     this.invalidInput = function (element) {
         element.style.border = "2px solid red";
         return false
@@ -60,12 +65,14 @@ function Form() {
         return (country.value.length > 2 && !nameRegex.test(country.value)) ? this.validInput(country) : this.invalidInput(country);
     };
 
-    this.checkAllInputs = function (inputs) {
-        this.validateId(inputs.id.value),
-            this.validateEmail(inputs.email.value),
-            this.validateDate(inputs.date.value),
-            this.validateName(inputs.name.value),
-            this.validateAddress(inputs.address.value),
-            this.validatePhoneNr(inputs.date.value)
+    this.validateAppointmentTitle = function (appointmentTitle) {
+        var nameRegex = /\d/;
+        return (appointmentTitle.value.length > 2 && !nameRegex.test(appointmentTitle.value)) ? this.validInput(appointmentTitle) : this.invalidInput(appointmentTitle);
     };
+    this.validateAppointmentDescription = function (appointmentDescription) {
+        var nameRegex = /\d/;
+        return (appointmentDescription.value.length > 2 && !nameRegex.test(appointmentDescription.value)) ? this.validInput(appointmentDescription) : this.invalidInput(appointmentDescription);
+    };
+
+
 }

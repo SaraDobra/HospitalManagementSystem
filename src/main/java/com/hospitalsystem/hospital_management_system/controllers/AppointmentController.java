@@ -64,11 +64,31 @@ public class AppointmentController {
 
 
     @PostMapping( "/addAppointment" )
-    public String addAppointment(@ModelAttribute( "appointment" ) Appointment appointment, @Valid String patient_name, @Valid String doctor_name, @Valid String date_time) {
+    public String addAppointment(@ModelAttribute( "appointment" ) Appointment appointment, @Valid String patient_name, @Valid String doctor_name, @Valid String date_time,Model model) {
         System.out.println("---->>>Appointment:" + appointment.toString());
         System.out.println("--->>>Patient Name" + patient_name);
         System.out.println("--->>>Koha " + date_time);
-        Appointment appointmentNew = setAppintmentFields(appointment, patient_name, doctor_name, date_time);
+        boolean patientExists = false;
+        boolean doctorExists = false;
+        if(!patientExistsByName(patient_name)){
+            model.addAttribute("message",new Message("Pacienti Nuk ekziston","warning"));
+
+        }else {
+            appointment = setPatient(appointment,patient_name);
+            patientExists = true;
+        }
+        if(!doctorExistsByName(doctor_name)){
+            model.addAttribute("message",new Message("Doktori Nuk ekziston","warning"));
+        }else{
+            appointment = setUser(appointment,doctor_name);
+            doctorExists = true;
+        }
+        model.addAttribute("appointment", appointment);
+        if(patientExists == false || doctorExists == false){
+            return "/appointment/add-appointment";
+        }
+
+        Appointment appointmentNew = setAppointmentFields(appointment, patient_name, doctor_name, date_time);
         appointmentService.addAppointment(appointmentNew);
 
         return "redirect:/appointment/appointments";
@@ -78,14 +98,14 @@ public class AppointmentController {
     public String editAppointment(@ModelAttribute( "appointment" ) Appointment appointment, @Valid String patient_name, @Valid String doctor_name, @Valid String date_time) {
         System.out.println("--->>>Patient Name" + patient_name);
         System.out.println("--->>>Koha " + date_time);
-        Appointment appointmentUpdate = setAppintmentFields(appointment, patient_name, doctor_name, date_time);
+        Appointment appointmentUpdate = setAppointmentFields(appointment, patient_name, doctor_name, date_time);
         System.out.println("---->>>Appointment:" + appointmentUpdate.toString());
         appointmentService.updateAppointment(appointmentUpdate);
 
         return "redirect:/appointment/appointments";
     }
 
-    private Appointment setAppintmentFields(Appointment appointment, String patient_name, String doctor_name, String date_time) {
+    private Appointment setAppointmentFields(Appointment appointment, String patient_name, String doctor_name, String date_time) {
         Patient patient = patientService.findByNameAndLastName(patient_name.split(" ")[0], patient_name.split(" ")[1]);
         appointment.setPatient(patient);
         User user = userService.findByFirstNameAndLastName(doctor_name.split(" ")[0], doctor_name.split(" ")[1]);
@@ -130,5 +150,37 @@ public class AppointmentController {
                 dateToConvert.toInstant(), ZoneId.systemDefault());
     }
 
+    private boolean patientExistsByName(String name){
+        String firstName,lastName;
+        if(name.isEmpty() || name.split(" ").length !=2){
+            return false;
+        }
+        firstName = name.split(" ")[0];
+        lastName = name.split(" ")[1];
+        return patientService.existsByName(firstName,lastName);
+    }
 
+    private boolean doctorExistsByName(String name){
+        String firstName,lastName;
+        if(name.isEmpty() || name.split(" ").length !=2){
+            return false;
+        }
+        firstName = name.split(" ")[0];
+        lastName = name.split(" ")[1];
+        return userService.existsByName(firstName,lastName);
+    }
+
+    private Appointment setPatient(Appointment appointment,String patient_name){
+        Patient patient = patientService.findByNameAndLastName(patient_name.split(" ")[0], patient_name.split(" ")[1]);
+        appointment.setPatient(patient);
+        patient.addAppointment(appointment);
+        return appointment;
+    }
+
+    private Appointment setUser(Appointment appointment,String doctor_name){
+        User user = userService.findByFirstNameAndLastName(doctor_name.split(" ")[0], doctor_name.split(" ")[1]);
+        appointment.setUser(user);
+        user.addAppointment(appointment);
+        return appointment;
+    }
 }

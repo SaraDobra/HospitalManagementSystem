@@ -202,4 +202,5 @@ public class PatientController {
         return patientService.patientExists(idNr);
     }
 
+
 }

@@ -18,4 +18,6 @@ public interface PatientRepository extends JpaRepository<Patient, Long> {
     List<Patient> fetchPatients(String term);
 
     Patient findByFirstNameAndLastName(String firstName, String lastName);
+
+    boolean existsByFirstNameAndLastName(String fistName,String lastName);
 }

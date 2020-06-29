@@ -47,4 +47,8 @@ public class PatientService {
     public boolean patientExists(String idNr) {
         return patientRepository.existsByIdNr(idNr);
     }
+
+    public boolean existsByName(String firstName, String lastName) {
+        return patientRepository.existsByFirstNameAndLastName(firstName,lastName);
+    }
 }

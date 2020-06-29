@@ -58,4 +58,8 @@ public class UserService {
     public long usersCount() {
         return userRepository.count();
     }
+
+    public boolean existsByName(String firstName, String lastName) {
+        return userRepository.existsByFirstNameAndLastName(firstName,lastName);
+    }
 }
