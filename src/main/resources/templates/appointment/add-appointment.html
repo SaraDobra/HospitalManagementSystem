@@ -52,11 +52,30 @@
                     select: function(event, ui) {
                         this.value = ui.item.label;
                         console.log(ui.item.toString())
+                        validatePatientName(ui.item)
                         return false;
                     }
                 });
 
             });
+
+
+            invalidInputP = function (element) {
+                document.getElementById("patient_name").style.border = "2px solid red";
+                return false
+            };
+
+            validInputP = function (element) {
+                document.getElementById("patient_name").style.border = "2px solid green";
+                return true
+            };
+
+
+            validatePatientName = function (patientName) {
+                var nameRegex = /^[A-Za-z0-9]+ [A-Za-z0-9]+$/;
+                return (nameRegex.test(patientName.value)) ? this.validInputP(patientName) : this.invalidInputP(patientName);
+            };
+
         </script>
 
         <script type="text/javascript">
@@ -67,11 +86,28 @@
                     select: function(event, ui) {
                         this.value = ui.item.label;
                         console.log(ui.item.toString())
+                        validateDoctorName(ui.item)
                         return false;
                     }
                 });
 
             });
+
+            invalidInput = function (element) {
+                document.getElementById("doctor_name").style.border = "2px solid red";
+                return false
+            };
+
+            validInput = function (element) {
+                document.getElementById("doctor_name").style.border = "2px solid green";
+                return true
+            };
+
+
+            validateDoctorName = function (doctorName) {
+                var nameRegex = /^[A-Za-z0-9]+ [A-Za-z0-9]+$/;
+                return (nameRegex.test(doctorName.value)) ? this.validInput(doctorName) : this.invalidInput(doctorName);
+            };
         </script>
         <style>
             .tooltip {
@@ -170,7 +206,7 @@
                                         </div>
                                     </div>
                                     <div class="item form-group">
-                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="description">Shenim <span class="required">*</span>
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="description">Shënim
                                         </label>
                                         <div class="col-md-6 col-sm-6 col-xs-12">
                                             <input  type="text" th:field="*{description}" id="description" name="description" required="required" class="form-control col-md-7 col-xs-12">

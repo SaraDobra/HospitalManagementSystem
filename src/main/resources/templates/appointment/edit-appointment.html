@@ -41,7 +41,7 @@
 
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-
+    <script defer src="/js/Form.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script type="text/javascript">
@@ -52,11 +52,29 @@
                 select: function(event, ui) {
                     this.value = ui.item.label;
                     console.log(ui.item.toString())
+                    validatePatientName(ui.item)
                     return false;
                 }
             });
 
         });
+
+
+        invalidInputP = function (element) {
+            document.getElementById("patient_name").style.border = "2px solid red";
+            return false
+        };
+
+        validInputP = function (element) {
+            document.getElementById("patient_name").style.border = "2px solid green";
+            return true
+        };
+
+
+        validatePatientName = function (patientName) {
+            var nameRegex = /^[A-Za-z0-9]+ [A-Za-z0-9]+$/;
+            return (nameRegex.test(patientName.value)) ? this.validInputP(patientName) : this.invalidInputP(patientName);
+        };
     </script>
 
     <script type="text/javascript">
@@ -67,11 +85,28 @@
                 select: function(event, ui) {
                     this.value = ui.item.label;
                     console.log(ui.item.toString())
+                    validateDoctorName(ui.item)
                     return false;
                 }
             });
 
         });
+
+        invalidInput = function (element) {
+            document.getElementById("doctor_name").style.border = "2px solid red";
+            return false
+        };
+
+        validInput = function (element) {
+            document.getElementById("doctor_name").style.border = "2px solid green";
+            return true
+        };
+
+
+        validateDoctorName = function (doctorName) {
+            var nameRegex = /^[A-Za-z0-9]+ [A-Za-z0-9]+$/;
+            return (nameRegex.test(doctorName.value)) ? this.validInput(doctorName) : this.invalidInput(doctorName);
+        };
     </script>
     <style>
         .tooltip {
@@ -151,13 +186,13 @@
                             <div class="x_content">
 
 
-                                <form  class="form-horizontal form-label-left" method="POST"  th:action="@{/appointment/editAppointment}" th:object="${appointment}" novalidate >
+                                <form id ="form"  class="form-horizontal form-label-left" method="POST"  th:action="@{/appointment/editAppointment}" th:object="${appointment}" novalidate >
 
                                     <div class="item form-group" style="display: none">
                                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="title">Titulli <span class="required">*</span>
                                         </label>
                                         <div class="col-md-6 col-sm-6 col-xs-12">
-                                            <input   type="text" th:field="*{id}" id="title" name="title" required="required" class="form-control col-md-7 col-xs-12">
+                                            <input   type="text" th:field="*{id}"  name="title" required="required" class="form-control col-md-7 col-xs-12">
                                         </div>
                                     </div>
                                     <div class="item form-group">
@@ -177,7 +212,7 @@
                                         </div>
                                     </div>
                                     <div class="item form-group">
-                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="description">Shenim <span class="required">*</span>
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="description">Shenim
                                         </label>
                                         <div class="col-md-6 col-sm-6 col-xs-12">
                                             <input  type="text" th:field="*{description}" id="description" name="description" required="required" class="form-control col-md-7 col-xs-12">
@@ -220,7 +255,7 @@
                                     <div class="form-group">
                                         <div class="col-md-6 col-md-offset-3">
                                             <button  class="btn btn-primary" type="reset">Anulo</button>
-                                            <button id="send" type="submit" class="btn btn-success">Edito</button>
+                                            <button id="submit" type="submit" class="btn btn-success">Edito</button>
                                         </div>
                                     </div>
                                 </form>
@@ -271,6 +306,7 @@
 <!--    <script src="/bootstrap-daterangepicker/daterangepicker.js"></script>-->
 
 <!-- Custom Theme Scripts -->
+<script defer src="/js/appointmentForm.js"></script>
 <script src="/js/custom.min.js"></script>
 </body>
 

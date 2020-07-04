@@ -74,5 +74,13 @@ function Form() {
         return (appointmentDescription.value.length > 2 && !nameRegex.test(appointmentDescription.value)) ? this.validInput(appointmentDescription) : this.invalidInput(appointmentDescription);
     };
 
+    this.validatePatientName = function (patientName) {
+        var nameRegex = /^[A-Za-z0-9]+ [A-Za-z0-9]+$/;
+        return (nameRegex.test(patientName.value)) ? this.validInput(patientName) : this.invalidInput(patientName);
+    };
+    this.validateDoctorName= function (doctorName) {
+        var nameRegex = /^[A-Za-z0-9]+ [A-Za-z0-9]+$/;
+        return (nameRegex.test(doctorName.value)) ? this.validInput(doctorName) : this.invalidInput(doctorName);
 
+    }
 }

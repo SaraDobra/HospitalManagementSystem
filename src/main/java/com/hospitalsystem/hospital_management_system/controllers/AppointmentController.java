@@ -95,9 +95,28 @@ public class AppointmentController {
     }
 
     @PostMapping( "/editAppointment" )
-    public String editAppointment(@ModelAttribute( "appointment" ) Appointment appointment, @Valid String patient_name, @Valid String doctor_name, @Valid String date_time) {
+    public String editAppointment(@ModelAttribute( "appointment" ) Appointment appointment, @Valid String patient_name, @Valid String doctor_name, @Valid String date_time,Model model) {
         System.out.println("--->>>Patient Name" + patient_name);
         System.out.println("--->>>Koha " + date_time);
+        boolean patientExists = false;
+        boolean doctorExists = false;
+        if(!patientExistsByName(patient_name)){
+            model.addAttribute("message",new Message("Pacienti Nuk ekziston","warning"));
+
+        }else {
+            appointment = setPatient(appointment,patient_name);
+            patientExists = true;
+        }
+        if(!doctorExistsByName(doctor_name)){
+            model.addAttribute("message",new Message("Doktori Nuk ekziston","warning"));
+        }else{
+            appointment = setUser(appointment,doctor_name);
+            doctorExists = true;
+        }
+        model.addAttribute("appointment", appointment);
+        if(patientExists == false || doctorExists == false){
+            return "/appointment/add-appointment";
+        }
         Appointment appointmentUpdate = setAppointmentFields(appointment, patient_name, doctor_name, date_time);
         System.out.println("---->>>Appointment:" + appointmentUpdate.toString());
         appointmentService.updateAppointment(appointmentUpdate);

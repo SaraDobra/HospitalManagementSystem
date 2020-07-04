@@ -15,22 +15,26 @@ formFields.title.addEventListener("input", function(){
     g_form.validateAppointmentTitle(formFields.title);
 });
 
-formFields.description.addEventListener("input", function(){
-    g_form.validateAppointmentDescription(formFields.description);
-});
-
 formFields.date_time.addEventListener("change", function(){
     g_form.validateDateTime(formFields.date_time);
+});
+
+formFields.patient_name.addEventListener("input", function(){
+    g_form.validatePatientName(formFields.patient_name);
+
+});
+
+formFields.doctor_name.addEventListener("input", function(){
+    g_form.validateDoctorName(formFields.doctor_name);
+
 });
 
 formFields.form.addEventListener("submit", function(event){
 
     console.log(g_form.validateAppointmentTitle(formFields.title));
     console.log(g_form.validateDateTime(formFields.date_time));
-    console.log(g_form.validateAppointmentDescription(formFields.description));
 
     if(!g_form.validateAppointmentTitle(formFields.title)
-        || !g_form.validateAppointmentDescription(formFields.description)
         || !g_form.validateDateTime(formFields.date_time)){
         event.preventDefault();
     }else{
