@@ -4,6 +4,7 @@ import com.hospitalsystem.hospital_management_system.models.*;
 import com.hospitalsystem.hospital_management_system.services.DepartmentService;
 import com.hospitalsystem.hospital_management_system.services.RoleService;
 import com.hospitalsystem.hospital_management_system.services.UserService;
+import org.dom4j.rule.Mode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -99,6 +100,7 @@ public class UserController {
 
     @GetMapping("/admin/addUser")
     public String showaddUserForm(Model model){
+
         User user = new User();
         model.addAttribute("user",user);
         model.addAttribute("departments",departmentService.getAllDepartments());
@@ -109,13 +111,21 @@ public class UserController {
     }
 
     @PostMapping("/admin/addUser")
-    public String addUser(@ModelAttribute("user") User user,@Valid  String departmentId,@Valid String roleId){
-       Optional<Department> department = departmentService.findById(departmentId);
+    public String addUser(@ModelAttribute("user") User user, @Valid  String departmentId, @Valid String roleId, Model model){
+        if (userExistsByEmail(user.getEmail())) {
+            model.addAttribute("user",user);
+            model.addAttribute("message",new Message("Email ekziston","warning"));
+            model.addAttribute("departments",departmentService.getAllDepartments());
+            Stream<Role> roles = roleService.getAllRoles().stream().filter(role -> !role.getRole().name().equals(RoleName.ROLE_ADMIN.name()));
+            model.addAttribute("roles", roles.collect(Collectors.toList()));
+            return "user/add-user";
+        }
+        Optional<Department> department = departmentService.findById(departmentId);
         department.ifPresent(user::setDepartment);
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setActive("1");
         Optional<Role> role = roleService.getRoleById(roleId);
         role.ifPresent(user::addRole);
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         userService.addPatient(user);
         return "redirect:/admin/users";
     }
@@ -138,6 +148,10 @@ public class UserController {
             }
         }
         return suggestions;
+    }
+
+    public boolean userExistsByEmail(String email){
+       return userService.existsByEmail(email);
     }
 
 }

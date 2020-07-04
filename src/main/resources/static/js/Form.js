@@ -4,6 +4,16 @@ function Form() {
         return (name.value.length > 2 && !nameRegex.test(name.value)) ? this.validInput(name) : this.invalidInput(name);
     };
 
+    this.validateUserName = function (userName) {
+        var nameRegex = /\d/;
+        return (userName.value.length > 2 && !nameRegex.test(userName.value)) ? this.validInput(userName) : this.invalidInput(userName);
+    };
+
+    this.validatePassword = function (password) {
+        var patt = new RegExp(/^[a-zA-Z0-9\s,'-]*$/);
+        return (password.value.length > 4 && patt.test(password.value)) ? this.validInput(password) : this.invalidInput(password);
+    };
+
     this.validateLastName = function (lastName) {
         var nameRegex = /\d/;
         return (lastName.value.length > 2 && !nameRegex.test(lastName.value)) ? this.validInput(lastName) : this.invalidInput(lastName);

@@ -37,21 +37,21 @@
                             <div class="x_content">
 
 
-                                <form  class="form-horizontal form-label-left" method="POST"  th:action="@{/admin/addUser}" th:object="${user}" novalidate style="margin-top: 10px">
+                                <form id="form" class="form-horizontal form-label-left" method="POST"  th:action="@{/admin/addUser}" th:object="${user}" novalidate style="margin-top: 10px">
 
                                     <div class="item form-group">
-                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="firstName">Emri <span class="required">*</span>
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" >Emri <span class="required">*</span>
                                         </label>
                                         <div class="col-md-6 col-sm-6 col-xs-12">
-                                            <input   type="text" th:field="*{firstName}" id="firstName" name="firstName" required="required" class="form-control col-md-7 col-xs-12">
+                                            <input id="firstName"   type="text" th:field="*{firstName}" name="firstName" required="required" class="form-control col-md-7 col-xs-12">
                                         </div>
                                     </div>
 
                                     <div class="item form-group">
-                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="lastName">Mbiemri <span class="required">*</span>
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" >Mbiemri <span class="required">*</span>
                                         </label>
                                         <div class="col-md-6 col-sm-6 col-xs-12">
-                                            <input  type="text" th:field="*{lastName}" id="lastName" name="lastName" required="required" class="form-control col-md-7 col-xs-12">
+                                            <input id="lastName" type="text" th:field="*{lastName}"  name="lastName" required="required" class="form-control col-md-7 col-xs-12">
                                         </div>
                                     </div>
 
@@ -59,7 +59,7 @@
                                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">Email <span class="required">*</span>
                                         </label>
                                         <div class="col-md-6 col-sm-6 col-xs-12">
-                                            <input  type="email" id="email" th:field="*{email}" name="email" required="required" class="form-control col-md-7 col-xs-12">
+                                            <input  type="email" id="email" th:field="*{email}" name="email" required class="form-control col-md-7 col-xs-12">
                                         </div>
                                     </div>
 
@@ -91,7 +91,7 @@
 
 
                                     <div class="item form-group">
-                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="specialization">Specializimi <span class="required">*</span>
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="specialization">Specializimi
                                         </label>
                                         <div class="col-md-6 col-sm-6 col-xs-12">
                                             <input  type="text" th:field="*{specialization}" id="specialization" name="specialization" required="required" class="form-control col-md-7 col-xs-12">
@@ -129,7 +129,7 @@
                                     <div class="form-group">
                                         <div class="col-md-6 col-md-offset-3">
                                             <button  class="btn btn-primary" type="reset">Anulo</button>
-                                            <button id="send" type="submit" class="btn btn-success">Regjistro</button>
+                                            <button id="submit" type="submit" class="btn btn-success">Regjistro</button>
                                         </div>
                                     </div>
                                 </form>
@@ -141,6 +141,7 @@
         </div>
     </div>
 </div>
+<script defer src="/js/userForm.js"></script>
 <th:block th:replace="common/scripts.html" :: end></th:block>
 </body>
 

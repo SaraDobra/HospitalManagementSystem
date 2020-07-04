@@ -62,4 +62,8 @@ public class UserService {
     public boolean existsByName(String firstName, String lastName) {
         return userRepository.existsByFirstNameAndLastName(firstName,lastName);
     }
+
+    public boolean existsByEmail(String email) {
+        return userRepository.existsByEmail(email);
+    }
 }

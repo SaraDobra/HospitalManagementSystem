@@ -37,7 +37,7 @@
                             <div class="x_content">
 
 
-                                <form  class="form-horizontal form-label-left" method="POST"  th:action="@{/admin/EditUser}" th:object="${user}" novalidate style="margin-top: 10px">
+                                <form id="form" class="form-horizontal form-label-left" method="POST"  th:action="@{/admin/EditUser}" th:object="${user}" novalidate style="margin-top: 10px">
 
                                     <div class="item form-group" style="display: none">
                                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="firstName">Id <span class="required">*</span>
@@ -141,7 +141,7 @@
                                     <div class="form-group">
                                         <div class="col-md-6 col-md-offset-3">
                                             <button  class="btn btn-primary" type="reset">Anulo</button>
-                                            <button id="send" type="submit" class="btn btn-success">Edito</button>
+                                            <button id="submit" type="submit" class="btn btn-success">Edito</button>
                                         </div>
                                     </div>
                                 </form>
@@ -153,6 +153,7 @@
         </div>
     </div>
 </div>
+<script defer src="/js/userForm.js"></script>
 <th:block th:replace="common/scripts.html" :: end></th:block>
 <script>
     var role = $("#userRole").text()
