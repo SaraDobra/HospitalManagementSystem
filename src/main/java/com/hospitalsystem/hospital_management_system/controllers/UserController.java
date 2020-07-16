@@ -114,7 +114,7 @@ public class UserController {
     public String addUser(@ModelAttribute("user") User user, @Valid  String departmentId, @Valid String roleId, Model model){
         if (userExistsByEmail(user.getEmail())) {
             model.addAttribute("user",user);
-            model.addAttribute("message",new Message("Email ekziston","warning"));
+            model.addAttribute("message",new Message("Përdoruesi me këtë email ekziston","warning"));
             model.addAttribute("departments",departmentService.getAllDepartments());
             Stream<Role> roles = roleService.getAllRoles().stream().filter(role -> !role.getRole().name().equals(RoleName.ROLE_ADMIN.name()));
             model.addAttribute("roles", roles.collect(Collectors.toList()));

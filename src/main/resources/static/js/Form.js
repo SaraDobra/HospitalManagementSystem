@@ -11,7 +11,7 @@ function Form() {
 
     this.validatePassword = function (password) {
         var patt = new RegExp(/^[a-zA-Z0-9\s,'-]*$/);
-        return (password.value.length > 4 && patt.test(password.value)) ? this.validInput(password) : this.invalidInput(password);
+        return (password.value.length > 8 && patt.test(password.value)) ? this.validInput(password) : this.invalidInput(password);
     };
 
     this.validateLastName = function (lastName) {
@@ -26,7 +26,7 @@ function Form() {
 
     this.validateId = function (id) {
         console.log(id.value)
-        return (id.value.length > 7 && id.value) ? this.validInput(id) : this.invalidInput(id);
+        return id.value.length === 10 ? this.validInput(id) : this.invalidInput(id);
     };
 
     this.validateDate = function (date) {
