@@ -34,14 +34,18 @@ function Form() {
         var year = dateParts[0];
         var month = dateParts[1];
         var day = dateParts[2];
-        console.log(year+","+month+","+day);
+        console.log(year + "," + month + "," + day);
         var currentDate = new Date();
         var currentYear = currentDate.getFullYear();
         return (day > 1 && day < 32 && month > 1 && month < 12 && year > 1000 && year <= currentYear) ? this.validInput(date) : this.invalidInput(date);
     };
 
-    this.validateDateTime = function(dt){
-      return Date.parse(dt.value) ? this.validInput(dt) : this.invalidInput(dt)
+    this.validateDateTime = function (dt) {
+        d_now = new Date();
+        d_inp = new Date(dt.value)
+        console.log("d_now ="+d_now.getTime())
+        console.log("d_inp ="+d_inp.getTime())
+        return d_now.getTime() <= d_inp.getTime() ? this.validInput(dt) : this.invalidInput(dt);;
     };
 
 
@@ -88,7 +92,7 @@ function Form() {
         var nameRegex = /^[A-Za-z0-9]+ [A-Za-z0-9]+$/;
         return (nameRegex.test(patientName.value)) ? this.validInput(patientName) : this.invalidInput(patientName);
     };
-    this.validateDoctorName= function (doctorName) {
+    this.validateDoctorName = function (doctorName) {
         var nameRegex = /^[A-Za-z0-9]+ [A-Za-z0-9]+$/;
         return (nameRegex.test(doctorName.value)) ? this.validInput(doctorName) : this.invalidInput(doctorName);
 
